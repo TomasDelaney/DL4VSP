@@ -87,7 +87,8 @@ def main():
     logger.info("\n" + collect_env_info())
 
     model = build_detection_model(cfg)
-    model.to(cfg.MODEL.DEVICE)
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    model.to(device)
 
     # Initialize mixed-precision if necessary
     use_mixed_precision = cfg.DTYPE == 'float16'

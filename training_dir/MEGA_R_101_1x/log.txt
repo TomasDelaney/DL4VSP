@@ -1,0 +1,2526 @@
+2023-11-25 20:00:21,060 mega_core INFO: Using 1 GPUs
+2023-11-25 20:00:21,060 mega_core INFO: Namespace(config_file='configs\\MEGA\\vid_R_101_C4_MEGA_1x.yaml', launcher='pytorch', local_rank=0, skip_test=False, master_port='29999', save_name='', motion_specific=True, opts=['OUTPUT_DIR', 'training_dir\\MEGA_R_101_1x'], distributed=False)
+2023-11-25 20:00:21,060 mega_core INFO: Collecting env info (might take some time)
+2023-11-25 20:00:26,656 mega_core INFO: 
+PyTorch version: 2.1.1+cpu
+Is debug build: False
+CUDA used to build PyTorch: Could not collect
+ROCM used to build PyTorch: N/A
+
+OS: Microsoft Windows 11 Home
+GCC version: (x86_64-posix-seh-rev0, Built by MinGW-W64 project) 8.1.0
+Clang version: Could not collect
+CMake version: Could not collect
+Libc version: N/A
+
+Python version: 3.9.5 (tags/v3.9.5:0a7dcbd, May  3 2021, 17:27:52) [MSC v.1928 64 bit (AMD64)] (64-bit runtime)
+Python platform: Windows-10-10.0.22621-SP0
+Is CUDA available: False
+CUDA runtime version: 11.4.120
+CUDA_MODULE_LOADING set to: N/A
+GPU models and configuration: GPU 0: NVIDIA GeForce GTX 1650 with Max-Q Design
+Nvidia driver version: 531.41
+cuDNN version: C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.4\bin\cudnn_ops_train64_8.dll
+HIP runtime version: N/A
+MIOpen runtime version: N/A
+Is XNNPACK available: True
+
+CPU:
+Architecture=9
+CurrentClockSpeed=1803
+DeviceID=CPU0
+Family=198
+L2CacheSize=1024
+L2CacheSpeed=
+Manufacturer=GenuineIntel
+MaxClockSpeed=2304
+Name=Intel(R) Core(TM) i7-10510U CPU @ 1.80GHz
+ProcessorType=3
+Revision=
+
+Versions of relevant libraries:
+[pip3] numpy==1.26.2
+[pip3] torch==2.1.1
+[pip3] torchvision==0.16.1
+[conda] blas                      1.0                         mkl  
+[conda] mkl                       2021.2.0           haa95532_296  
+[conda] mkl-service               2.3.0            py38h2bbff1b_1  
+[conda] mkl_fft                   1.3.0            py38h277e83a_2  
+[conda] mkl_random                1.2.1            py38hf11a4ad_2  
+[conda] numpy                     1.20.1           py38h34a8a5c_0  
+[conda] numpy-base                1.20.1           py38haf7ebc8_0  
+[conda] numpydoc                  1.1.0              pyhd3eb1b0_1  
+        Pillow (10.1.0)
+2023-11-25 20:00:26,657 mega_core INFO: Loaded configuration file configs\MEGA\vid_R_101_C4_MEGA_1x.yaml
+2023-11-25 20:00:26,657 mega_core INFO: 
+MODEL:
+  VID:
+    METHOD: "mega"
+    ROI_BOX_HEAD:
+      ATTENTION:
+        ENABLE: True
+        STAGE: 3
+  META_ARCHITECTURE: "GeneralizedRCNNMEGA"
+  WEIGHT: "catalog://ImageNetPretrained/MSRA/R-101"
+  BACKBONE:
+    CONV_BODY: "R-101-C4"
+  ROI_BOX_HEAD:
+    FEATURE_EXTRACTOR: "MEGAFeatureExtractor"
+    PREDICTOR: "FPNPredictor"
+DATASETS:
+  TRAIN: ("DET_train_30classes", "VID_train_15frames")
+  TEST: ("VID_val_videos",)
+2023-11-25 20:00:26,658 mega_core INFO: Running with config:
+AMP_VERBOSE: False
+DATALOADER:
+  ASPECT_RATIO_GROUPING: True
+  NUM_WORKERS: 4
+  SIZE_DIVISIBILITY: 0
+DATASETS:
+  TEST: ('VID_val_videos',)
+  TRAIN: ('DET_train_30classes', 'VID_train_15frames')
+DTYPE: float32
+INPUT:
+  BRIGHTNESS: 0.0
+  CONTRAST: 0.0
+  HORIZONTAL_FLIP_PROB_TRAIN: 0.5
+  HUE: 0.0
+  MAX_SIZE_TEST: 1000
+  MAX_SIZE_TRAIN: 1000
+  MIN_SIZE_TEST: 600
+  MIN_SIZE_TRAIN: (600,)
+  PIXEL_MEAN: [102.9801, 115.9465, 122.7717]
+  PIXEL_STD: [1.0, 1.0, 1.0]
+  SATURATION: 0.0
+  TO_BGR255: True
+  VERTICAL_FLIP_PROB_TRAIN: 0.0
+MODEL:
+  BACKBONE:
+    CONV_BODY: R-101-C4
+    FREEZE_CONV_BODY_AT: 2
+  CLS_AGNOSTIC_BBOX_REG: False
+  DEVICE: cuda
+  FBNET:
+    ARCH: default
+    ARCH_DEF: 
+    BN_TYPE: bn
+    DET_HEAD_BLOCKS: []
+    DET_HEAD_LAST_SCALE: 1.0
+    DET_HEAD_STRIDE: 0
+    DW_CONV_SKIP_BN: True
+    DW_CONV_SKIP_RELU: True
+    KPTS_HEAD_BLOCKS: []
+    KPTS_HEAD_LAST_SCALE: 0.0
+    KPTS_HEAD_STRIDE: 0
+    MASK_HEAD_BLOCKS: []
+    MASK_HEAD_LAST_SCALE: 0.0
+    MASK_HEAD_STRIDE: 0
+    RPN_BN_TYPE: 
+    RPN_HEAD_BLOCKS: 0
+    SCALE_FACTOR: 1.0
+    WIDTH_DIVISOR: 1
+  FPN:
+    USE_GN: False
+    USE_RELU: False
+  GROUP_NORM:
+    DIM_PER_GP: -1
+    EPSILON: 1e-05
+    NUM_GROUPS: 32
+  KEYPOINT_ON: False
+  MASK_ON: False
+  META_ARCHITECTURE: GeneralizedRCNNMEGA
+  RESNETS:
+    BACKBONE_OUT_CHANNELS: 1024
+    DEFORMABLE_GROUPS: 1
+    NUM_GROUPS: 1
+    RES2_OUT_CHANNELS: 256
+    RES5_DILATION: 2
+    STAGE_WITH_DCN: (False, False, False, False)
+    STEM_FUNC: StemWithFixedBatchNorm
+    STEM_OUT_CHANNELS: 64
+    STRIDE_IN_1X1: True
+    TRANS_FUNC: BottleneckWithFixedBatchNorm
+    WIDTH_PER_GROUP: 64
+    WITH_MODULATED_DCN: False
+  RETINANET:
+    ANCHOR_SIZES: (32, 64, 128, 256, 512)
+    ANCHOR_STRIDES: (8, 16, 32, 64, 128)
+    ASPECT_RATIOS: (0.5, 1.0, 2.0)
+    BBOX_REG_BETA: 0.11
+    BBOX_REG_WEIGHT: 4.0
+    BG_IOU_THRESHOLD: 0.4
+    FG_IOU_THRESHOLD: 0.5
+    INFERENCE_TH: 0.05
+    LOSS_ALPHA: 0.25
+    LOSS_GAMMA: 2.0
+    NMS_TH: 0.4
+    NUM_CLASSES: 81
+    NUM_CONVS: 4
+    OCTAVE: 2.0
+    PRE_NMS_TOP_N: 1000
+    PRIOR_PROB: 0.01
+    SCALES_PER_OCTAVE: 3
+    STRADDLE_THRESH: 0
+    USE_C5: True
+  RETINANET_ON: False
+  ROI_BOX_HEAD:
+    CONV_HEAD_DIM: 256
+    DILATION: 1
+    FEATURE_EXTRACTOR: MEGAFeatureExtractor
+    MLP_HEAD_DIM: 1024
+    NUM_CLASSES: 31
+    NUM_STACKED_CONVS: 4
+    POOLER_RESOLUTION: 7
+    POOLER_SAMPLING_RATIO: 0
+    POOLER_SCALES: (0.0625,)
+    PREDICTOR: FPNPredictor
+    USE_GN: False
+  ROI_HEADS:
+    BATCH_SIZE_PER_IMAGE: 128
+    BBOX_REG_WEIGHTS: (10.0, 10.0, 5.0, 5.0)
+    BG_IOU_THRESHOLD: 0.5
+    DETECTIONS_PER_IMG: 300
+    FG_IOU_THRESHOLD: 0.5
+    NMS: 0.5
+    POSITIVE_FRACTION: 0.25
+    SCORE_THRESH: 0.001
+    USE_FPN: False
+  ROI_KEYPOINT_HEAD:
+    CONV_LAYERS: (512, 512, 512, 512, 512, 512, 512, 512)
+    FEATURE_EXTRACTOR: KeypointRCNNFeatureExtractor
+    MLP_HEAD_DIM: 1024
+    NUM_CLASSES: 17
+    POOLER_RESOLUTION: 14
+    POOLER_SAMPLING_RATIO: 0
+    POOLER_SCALES: (0.0625,)
+    PREDICTOR: KeypointRCNNPredictor
+    RESOLUTION: 14
+    SHARE_BOX_FEATURE_EXTRACTOR: True
+  ROI_MASK_HEAD:
+    CONV_LAYERS: (256, 256, 256, 256)
+    DILATION: 1
+    FEATURE_EXTRACTOR: ResNet50Conv5ROIFeatureExtractor
+    MLP_HEAD_DIM: 1024
+    POOLER_RESOLUTION: 14
+    POOLER_SAMPLING_RATIO: 0
+    POOLER_SCALES: (0.0625,)
+    POSTPROCESS_MASKS: False
+    POSTPROCESS_MASKS_THRESHOLD: 0.5
+    PREDICTOR: MaskRCNNC4Predictor
+    RESOLUTION: 14
+    SHARE_BOX_FEATURE_EXTRACTOR: True
+    USE_GN: False
+  RPN:
+    ANCHOR_SIZES: (64, 128, 256, 512)
+    ANCHOR_STRIDE: (16,)
+    ASPECT_RATIOS: (0.5, 1.0, 2.0)
+    BATCH_SIZE_PER_IMAGE: 256
+    BG_IOU_THRESHOLD: 0.3
+    FG_IOU_THRESHOLD: 0.7
+    FPN_POST_NMS_PER_BATCH: True
+    FPN_POST_NMS_TOP_N_TEST: 2000
+    FPN_POST_NMS_TOP_N_TRAIN: 2000
+    MIN_SIZE: 0
+    NMS_THRESH: 0.7
+    POSITIVE_FRACTION: 0.5
+    POST_NMS_TOP_N_TEST: 300
+    POST_NMS_TOP_N_TRAIN: 300
+    PRE_NMS_TOP_N_TEST: 6000
+    PRE_NMS_TOP_N_TRAIN: 6000
+    RPN_HEAD: SingleConvRPNHead
+    STRADDLE_THRESH: 0
+    USE_FPN: False
+  RPN_ONLY: False
+  VID:
+    DFF:
+      MAX_OFFSET: 0
+      MIN_OFFSET: -9
+    ENABLE: True
+    FGFA:
+      ALL_FRAME_INTERVAL: 19
+      KEY_FRAME_LOCATION: 9
+      MAX_OFFSET: 9
+      MIN_OFFSET: -9
+      REF_NUM: 2
+    FLOWNET_WEIGHT: models/flownet.ckpt
+    IGNORE: False
+    MEGA:
+      ALL_FRAME_INTERVAL: 25
+      GLOBAL:
+        ENABLE: True
+        RES_STAGE: 1
+        SHUFFLE: True
+        SIZE: 10
+      KEY_FRAME_LOCATION: 12
+      MAX_OFFSET: 12
+      MEMORY:
+        ENABLE: True
+        SIZE: 25
+      MIN_OFFSET: -12
+      RATIO: 0.2
+      REF_NUM_GLOBAL: 2
+      REF_NUM_LOCAL: 2
+      REF_NUM_MEM: 3
+    METHOD: mega
+    RDN:
+      ALL_FRAME_INTERVAL: 37
+      KEY_FRAME_LOCATION: 18
+      MAX_OFFSET: 18
+      MIN_OFFSET: -18
+      RATIO: 0.2
+      REF_NUM: 2
+    ROI_BOX_HEAD:
+      ATTENTION:
+        ADVANCED_STAGE: 0
+        EMBED_DIM: 64
+        ENABLE: True
+        GROUP: 16
+        STAGE: 3
+      REDUCE_CHANNEL: False
+    RPN:
+      REF_POST_NMS_TOP_N: 75
+      REF_PRE_NMS_TOP_N: 6000
+  WEIGHT: catalog://ImageNetPretrained/MSRA/R-101
+OUTPUT_DIR: training_dir\MEGA_R_101_1x
+PATHS_CATALOG: c:\users\endre\pycharmprojects\dl4vsp\mega_core\config\paths_catalog.py
+SOLVER:
+  BASE_LR: 0.001
+  BIAS_LR_FACTOR: 2
+  CHECKPOINT_PERIOD: 2500
+  GAMMA: 0.1
+  IMS_PER_BATCH: 1
+  MAX_ITER: 120000
+  MOMENTUM: 0.9
+  STEPS: (80000,)
+  TEST_PERIOD: 0
+  WARMUP_FACTOR: 0.3333333333333333
+  WARMUP_ITERS: 500
+  WARMUP_METHOD: linear
+  WEIGHT_DECAY: 0.0001
+  WEIGHT_DECAY_BIAS: 0
+TEST:
+  BBOX_AUG:
+    ENABLED: False
+    H_FLIP: False
+    MAX_SIZE: 4000
+    SCALES: ()
+    SCALE_H_FLIP: False
+  DETECTIONS_PER_IMG: 300
+  EXPECTED_RESULTS: []
+  EXPECTED_RESULTS_SIGMA_TOL: 4
+  IMS_PER_BATCH: 1
+2023-11-25 20:00:26,660 mega_core INFO: Saving config into: training_dir\MEGA_R_101_1x\config.yml
+2023-11-25 20:01:41,025 mega_core INFO: Using 1 GPUs
+2023-11-25 20:01:41,025 mega_core INFO: Namespace(config_file='configs\\MEGA\\vid_R_101_C4_MEGA_1x.yaml', launcher='pytorch', local_rank=0, skip_test=False, master_port='29999', save_name='', motion_specific=True, opts=['OUTPUT_DIR', 'training_dir\\MEGA_R_101_1x'], distributed=False)
+2023-11-25 20:01:41,025 mega_core INFO: Collecting env info (might take some time)
+2023-11-25 20:01:46,065 mega_core INFO: 
+PyTorch version: 2.1.1+cpu
+Is debug build: False
+CUDA used to build PyTorch: Could not collect
+ROCM used to build PyTorch: N/A
+
+OS: Microsoft Windows 11 Home
+GCC version: (x86_64-posix-seh-rev0, Built by MinGW-W64 project) 8.1.0
+Clang version: Could not collect
+CMake version: Could not collect
+Libc version: N/A
+
+Python version: 3.9.5 (tags/v3.9.5:0a7dcbd, May  3 2021, 17:27:52) [MSC v.1928 64 bit (AMD64)] (64-bit runtime)
+Python platform: Windows-10-10.0.22621-SP0
+Is CUDA available: False
+CUDA runtime version: 11.4.120
+CUDA_MODULE_LOADING set to: N/A
+GPU models and configuration: GPU 0: NVIDIA GeForce GTX 1650 with Max-Q Design
+Nvidia driver version: 531.41
+cuDNN version: C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.4\bin\cudnn_ops_train64_8.dll
+HIP runtime version: N/A
+MIOpen runtime version: N/A
+Is XNNPACK available: True
+
+CPU:
+Architecture=9
+CurrentClockSpeed=1803
+DeviceID=CPU0
+Family=198
+L2CacheSize=1024
+L2CacheSpeed=
+Manufacturer=GenuineIntel
+MaxClockSpeed=2304
+Name=Intel(R) Core(TM) i7-10510U CPU @ 1.80GHz
+ProcessorType=3
+Revision=
+
+Versions of relevant libraries:
+[pip3] numpy==1.26.2
+[pip3] torch==2.1.1
+[pip3] torchvision==0.16.1
+[conda] blas                      1.0                         mkl  
+[conda] mkl                       2021.2.0           haa95532_296  
+[conda] mkl-service               2.3.0            py38h2bbff1b_1  
+[conda] mkl_fft                   1.3.0            py38h277e83a_2  
+[conda] mkl_random                1.2.1            py38hf11a4ad_2  
+[conda] numpy                     1.20.1           py38h34a8a5c_0  
+[conda] numpy-base                1.20.1           py38haf7ebc8_0  
+[conda] numpydoc                  1.1.0              pyhd3eb1b0_1  
+        Pillow (10.1.0)
+2023-11-25 20:01:46,065 mega_core INFO: Loaded configuration file configs\MEGA\vid_R_101_C4_MEGA_1x.yaml
+2023-11-25 20:01:46,066 mega_core INFO: 
+MODEL:
+  VID:
+    METHOD: "mega"
+    ROI_BOX_HEAD:
+      ATTENTION:
+        ENABLE: True
+        STAGE: 3
+  META_ARCHITECTURE: "GeneralizedRCNNMEGA"
+  WEIGHT: "catalog://ImageNetPretrained/MSRA/R-101"
+  BACKBONE:
+    CONV_BODY: "R-101-C4"
+  ROI_BOX_HEAD:
+    FEATURE_EXTRACTOR: "MEGAFeatureExtractor"
+    PREDICTOR: "FPNPredictor"
+DATASETS:
+  TRAIN: ("DET_train_30classes", "VID_train_15frames")
+  TEST: ("VID_val_videos",)
+2023-11-25 20:01:46,066 mega_core INFO: Running with config:
+AMP_VERBOSE: False
+DATALOADER:
+  ASPECT_RATIO_GROUPING: True
+  NUM_WORKERS: 4
+  SIZE_DIVISIBILITY: 0
+DATASETS:
+  TEST: ('VID_val_videos',)
+  TRAIN: ('DET_train_30classes', 'VID_train_15frames')
+DTYPE: float32
+INPUT:
+  BRIGHTNESS: 0.0
+  CONTRAST: 0.0
+  HORIZONTAL_FLIP_PROB_TRAIN: 0.5
+  HUE: 0.0
+  MAX_SIZE_TEST: 1000
+  MAX_SIZE_TRAIN: 1000
+  MIN_SIZE_TEST: 600
+  MIN_SIZE_TRAIN: (600,)
+  PIXEL_MEAN: [102.9801, 115.9465, 122.7717]
+  PIXEL_STD: [1.0, 1.0, 1.0]
+  SATURATION: 0.0
+  TO_BGR255: True
+  VERTICAL_FLIP_PROB_TRAIN: 0.0
+MODEL:
+  BACKBONE:
+    CONV_BODY: R-101-C4
+    FREEZE_CONV_BODY_AT: 2
+  CLS_AGNOSTIC_BBOX_REG: False
+  DEVICE: cuda
+  FBNET:
+    ARCH: default
+    ARCH_DEF: 
+    BN_TYPE: bn
+    DET_HEAD_BLOCKS: []
+    DET_HEAD_LAST_SCALE: 1.0
+    DET_HEAD_STRIDE: 0
+    DW_CONV_SKIP_BN: True
+    DW_CONV_SKIP_RELU: True
+    KPTS_HEAD_BLOCKS: []
+    KPTS_HEAD_LAST_SCALE: 0.0
+    KPTS_HEAD_STRIDE: 0
+    MASK_HEAD_BLOCKS: []
+    MASK_HEAD_LAST_SCALE: 0.0
+    MASK_HEAD_STRIDE: 0
+    RPN_BN_TYPE: 
+    RPN_HEAD_BLOCKS: 0
+    SCALE_FACTOR: 1.0
+    WIDTH_DIVISOR: 1
+  FPN:
+    USE_GN: False
+    USE_RELU: False
+  GROUP_NORM:
+    DIM_PER_GP: -1
+    EPSILON: 1e-05
+    NUM_GROUPS: 32
+  KEYPOINT_ON: False
+  MASK_ON: False
+  META_ARCHITECTURE: GeneralizedRCNNMEGA
+  RESNETS:
+    BACKBONE_OUT_CHANNELS: 1024
+    DEFORMABLE_GROUPS: 1
+    NUM_GROUPS: 1
+    RES2_OUT_CHANNELS: 256
+    RES5_DILATION: 2
+    STAGE_WITH_DCN: (False, False, False, False)
+    STEM_FUNC: StemWithFixedBatchNorm
+    STEM_OUT_CHANNELS: 64
+    STRIDE_IN_1X1: True
+    TRANS_FUNC: BottleneckWithFixedBatchNorm
+    WIDTH_PER_GROUP: 64
+    WITH_MODULATED_DCN: False
+  RETINANET:
+    ANCHOR_SIZES: (32, 64, 128, 256, 512)
+    ANCHOR_STRIDES: (8, 16, 32, 64, 128)
+    ASPECT_RATIOS: (0.5, 1.0, 2.0)
+    BBOX_REG_BETA: 0.11
+    BBOX_REG_WEIGHT: 4.0
+    BG_IOU_THRESHOLD: 0.4
+    FG_IOU_THRESHOLD: 0.5
+    INFERENCE_TH: 0.05
+    LOSS_ALPHA: 0.25
+    LOSS_GAMMA: 2.0
+    NMS_TH: 0.4
+    NUM_CLASSES: 81
+    NUM_CONVS: 4
+    OCTAVE: 2.0
+    PRE_NMS_TOP_N: 1000
+    PRIOR_PROB: 0.01
+    SCALES_PER_OCTAVE: 3
+    STRADDLE_THRESH: 0
+    USE_C5: True
+  RETINANET_ON: False
+  ROI_BOX_HEAD:
+    CONV_HEAD_DIM: 256
+    DILATION: 1
+    FEATURE_EXTRACTOR: MEGAFeatureExtractor
+    MLP_HEAD_DIM: 1024
+    NUM_CLASSES: 31
+    NUM_STACKED_CONVS: 4
+    POOLER_RESOLUTION: 7
+    POOLER_SAMPLING_RATIO: 0
+    POOLER_SCALES: (0.0625,)
+    PREDICTOR: FPNPredictor
+    USE_GN: False
+  ROI_HEADS:
+    BATCH_SIZE_PER_IMAGE: 128
+    BBOX_REG_WEIGHTS: (10.0, 10.0, 5.0, 5.0)
+    BG_IOU_THRESHOLD: 0.5
+    DETECTIONS_PER_IMG: 300
+    FG_IOU_THRESHOLD: 0.5
+    NMS: 0.5
+    POSITIVE_FRACTION: 0.25
+    SCORE_THRESH: 0.001
+    USE_FPN: False
+  ROI_KEYPOINT_HEAD:
+    CONV_LAYERS: (512, 512, 512, 512, 512, 512, 512, 512)
+    FEATURE_EXTRACTOR: KeypointRCNNFeatureExtractor
+    MLP_HEAD_DIM: 1024
+    NUM_CLASSES: 17
+    POOLER_RESOLUTION: 14
+    POOLER_SAMPLING_RATIO: 0
+    POOLER_SCALES: (0.0625,)
+    PREDICTOR: KeypointRCNNPredictor
+    RESOLUTION: 14
+    SHARE_BOX_FEATURE_EXTRACTOR: True
+  ROI_MASK_HEAD:
+    CONV_LAYERS: (256, 256, 256, 256)
+    DILATION: 1
+    FEATURE_EXTRACTOR: ResNet50Conv5ROIFeatureExtractor
+    MLP_HEAD_DIM: 1024
+    POOLER_RESOLUTION: 14
+    POOLER_SAMPLING_RATIO: 0
+    POOLER_SCALES: (0.0625,)
+    POSTPROCESS_MASKS: False
+    POSTPROCESS_MASKS_THRESHOLD: 0.5
+    PREDICTOR: MaskRCNNC4Predictor
+    RESOLUTION: 14
+    SHARE_BOX_FEATURE_EXTRACTOR: True
+    USE_GN: False
+  RPN:
+    ANCHOR_SIZES: (64, 128, 256, 512)
+    ANCHOR_STRIDE: (16,)
+    ASPECT_RATIOS: (0.5, 1.0, 2.0)
+    BATCH_SIZE_PER_IMAGE: 256
+    BG_IOU_THRESHOLD: 0.3
+    FG_IOU_THRESHOLD: 0.7
+    FPN_POST_NMS_PER_BATCH: True
+    FPN_POST_NMS_TOP_N_TEST: 2000
+    FPN_POST_NMS_TOP_N_TRAIN: 2000
+    MIN_SIZE: 0
+    NMS_THRESH: 0.7
+    POSITIVE_FRACTION: 0.5
+    POST_NMS_TOP_N_TEST: 300
+    POST_NMS_TOP_N_TRAIN: 300
+    PRE_NMS_TOP_N_TEST: 6000
+    PRE_NMS_TOP_N_TRAIN: 6000
+    RPN_HEAD: SingleConvRPNHead
+    STRADDLE_THRESH: 0
+    USE_FPN: False
+  RPN_ONLY: False
+  VID:
+    DFF:
+      MAX_OFFSET: 0
+      MIN_OFFSET: -9
+    ENABLE: True
+    FGFA:
+      ALL_FRAME_INTERVAL: 19
+      KEY_FRAME_LOCATION: 9
+      MAX_OFFSET: 9
+      MIN_OFFSET: -9
+      REF_NUM: 2
+    FLOWNET_WEIGHT: models/flownet.ckpt
+    IGNORE: False
+    MEGA:
+      ALL_FRAME_INTERVAL: 25
+      GLOBAL:
+        ENABLE: True
+        RES_STAGE: 1
+        SHUFFLE: True
+        SIZE: 10
+      KEY_FRAME_LOCATION: 12
+      MAX_OFFSET: 12
+      MEMORY:
+        ENABLE: True
+        SIZE: 25
+      MIN_OFFSET: -12
+      RATIO: 0.2
+      REF_NUM_GLOBAL: 2
+      REF_NUM_LOCAL: 2
+      REF_NUM_MEM: 3
+    METHOD: mega
+    RDN:
+      ALL_FRAME_INTERVAL: 37
+      KEY_FRAME_LOCATION: 18
+      MAX_OFFSET: 18
+      MIN_OFFSET: -18
+      RATIO: 0.2
+      REF_NUM: 2
+    ROI_BOX_HEAD:
+      ATTENTION:
+        ADVANCED_STAGE: 0
+        EMBED_DIM: 64
+        ENABLE: True
+        GROUP: 16
+        STAGE: 3
+      REDUCE_CHANNEL: False
+    RPN:
+      REF_POST_NMS_TOP_N: 75
+      REF_PRE_NMS_TOP_N: 6000
+  WEIGHT: catalog://ImageNetPretrained/MSRA/R-101
+OUTPUT_DIR: training_dir\MEGA_R_101_1x
+PATHS_CATALOG: c:\users\endre\pycharmprojects\dl4vsp\mega_core\config\paths_catalog.py
+SOLVER:
+  BASE_LR: 0.001
+  BIAS_LR_FACTOR: 2
+  CHECKPOINT_PERIOD: 2500
+  GAMMA: 0.1
+  IMS_PER_BATCH: 1
+  MAX_ITER: 120000
+  MOMENTUM: 0.9
+  STEPS: (80000,)
+  TEST_PERIOD: 0
+  WARMUP_FACTOR: 0.3333333333333333
+  WARMUP_ITERS: 500
+  WARMUP_METHOD: linear
+  WEIGHT_DECAY: 0.0001
+  WEIGHT_DECAY_BIAS: 0
+TEST:
+  BBOX_AUG:
+    ENABLED: False
+    H_FLIP: False
+    MAX_SIZE: 4000
+    SCALES: ()
+    SCALE_H_FLIP: False
+  DETECTIONS_PER_IMG: 300
+  EXPECTED_RESULTS: []
+  EXPECTED_RESULTS_SIGMA_TOL: 4
+  IMS_PER_BATCH: 1
+2023-11-25 20:01:46,069 mega_core INFO: Saving config into: training_dir\MEGA_R_101_1x\config.yml
+2023-11-25 20:12:04,742 mega_core INFO: Using 1 GPUs
+2023-11-25 20:12:04,742 mega_core INFO: Namespace(config_file='configs\\MEGA\\vid_R_101_C4_MEGA_1x.yaml', launcher='pytorch', local_rank=0, skip_test=False, master_port='29999', save_name='', motion_specific=True, opts=['OUTPUT_DIR', 'training_dir\\MEGA_R_101_1x'], distributed=False)
+2023-11-25 20:12:04,743 mega_core INFO: Collecting env info (might take some time)
+2023-11-25 20:12:11,740 mega_core INFO: 
+PyTorch version: 2.1.1+cpu
+Is debug build: False
+CUDA used to build PyTorch: Could not collect
+ROCM used to build PyTorch: N/A
+
+OS: Microsoft Windows 11 Home
+GCC version: (x86_64-posix-seh-rev0, Built by MinGW-W64 project) 8.1.0
+Clang version: Could not collect
+CMake version: Could not collect
+Libc version: N/A
+
+Python version: 3.9.5 (tags/v3.9.5:0a7dcbd, May  3 2021, 17:27:52) [MSC v.1928 64 bit (AMD64)] (64-bit runtime)
+Python platform: Windows-10-10.0.22621-SP0
+Is CUDA available: False
+CUDA runtime version: 11.4.120
+CUDA_MODULE_LOADING set to: N/A
+GPU models and configuration: GPU 0: NVIDIA GeForce GTX 1650 with Max-Q Design
+Nvidia driver version: 531.41
+cuDNN version: C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.4\bin\cudnn_ops_train64_8.dll
+HIP runtime version: N/A
+MIOpen runtime version: N/A
+Is XNNPACK available: True
+
+CPU:
+Architecture=9
+CurrentClockSpeed=1803
+DeviceID=CPU0
+Family=198
+L2CacheSize=1024
+L2CacheSpeed=
+Manufacturer=GenuineIntel
+MaxClockSpeed=2304
+Name=Intel(R) Core(TM) i7-10510U CPU @ 1.80GHz
+ProcessorType=3
+Revision=
+
+Versions of relevant libraries:
+[pip3] numpy==1.26.2
+[pip3] torch==2.1.1
+[pip3] torchvision==0.16.1
+[conda] blas                      1.0                         mkl  
+[conda] mkl                       2021.2.0           haa95532_296  
+[conda] mkl-service               2.3.0            py38h2bbff1b_1  
+[conda] mkl_fft                   1.3.0            py38h277e83a_2  
+[conda] mkl_random                1.2.1            py38hf11a4ad_2  
+[conda] numpy                     1.20.1           py38h34a8a5c_0  
+[conda] numpy-base                1.20.1           py38haf7ebc8_0  
+[conda] numpydoc                  1.1.0              pyhd3eb1b0_1  
+[conda] pytorch                   2.1.0           py3.8_cuda11.8_cudnn8_0    pytorch
+[conda] pytorch-cuda              11.8                 h24eeafa_5    pytorch
+[conda] pytorch-mutex             1.0                        cuda    pytorch
+[conda] torchaudio                2.1.0                    pypi_0    pypi
+[conda] torchvision               0.16.0                   pypi_0    pypi
+        Pillow (10.1.0)
+2023-11-25 20:12:11,741 mega_core INFO: Loaded configuration file configs\MEGA\vid_R_101_C4_MEGA_1x.yaml
+2023-11-25 20:12:11,741 mega_core INFO: 
+MODEL:
+  VID:
+    METHOD: "mega"
+    ROI_BOX_HEAD:
+      ATTENTION:
+        ENABLE: True
+        STAGE: 3
+  META_ARCHITECTURE: "GeneralizedRCNNMEGA"
+  WEIGHT: "catalog://ImageNetPretrained/MSRA/R-101"
+  BACKBONE:
+    CONV_BODY: "R-101-C4"
+  ROI_BOX_HEAD:
+    FEATURE_EXTRACTOR: "MEGAFeatureExtractor"
+    PREDICTOR: "FPNPredictor"
+DATASETS:
+  TRAIN: ("DET_train_30classes", "VID_train_15frames")
+  TEST: ("VID_val_videos",)
+2023-11-25 20:12:11,743 mega_core INFO: Running with config:
+AMP_VERBOSE: False
+DATALOADER:
+  ASPECT_RATIO_GROUPING: True
+  NUM_WORKERS: 4
+  SIZE_DIVISIBILITY: 0
+DATASETS:
+  TEST: ('VID_val_videos',)
+  TRAIN: ('DET_train_30classes', 'VID_train_15frames')
+DTYPE: float32
+INPUT:
+  BRIGHTNESS: 0.0
+  CONTRAST: 0.0
+  HORIZONTAL_FLIP_PROB_TRAIN: 0.5
+  HUE: 0.0
+  MAX_SIZE_TEST: 1000
+  MAX_SIZE_TRAIN: 1000
+  MIN_SIZE_TEST: 600
+  MIN_SIZE_TRAIN: (600,)
+  PIXEL_MEAN: [102.9801, 115.9465, 122.7717]
+  PIXEL_STD: [1.0, 1.0, 1.0]
+  SATURATION: 0.0
+  TO_BGR255: True
+  VERTICAL_FLIP_PROB_TRAIN: 0.0
+MODEL:
+  BACKBONE:
+    CONV_BODY: R-101-C4
+    FREEZE_CONV_BODY_AT: 2
+  CLS_AGNOSTIC_BBOX_REG: False
+  DEVICE: cuda
+  FBNET:
+    ARCH: default
+    ARCH_DEF: 
+    BN_TYPE: bn
+    DET_HEAD_BLOCKS: []
+    DET_HEAD_LAST_SCALE: 1.0
+    DET_HEAD_STRIDE: 0
+    DW_CONV_SKIP_BN: True
+    DW_CONV_SKIP_RELU: True
+    KPTS_HEAD_BLOCKS: []
+    KPTS_HEAD_LAST_SCALE: 0.0
+    KPTS_HEAD_STRIDE: 0
+    MASK_HEAD_BLOCKS: []
+    MASK_HEAD_LAST_SCALE: 0.0
+    MASK_HEAD_STRIDE: 0
+    RPN_BN_TYPE: 
+    RPN_HEAD_BLOCKS: 0
+    SCALE_FACTOR: 1.0
+    WIDTH_DIVISOR: 1
+  FPN:
+    USE_GN: False
+    USE_RELU: False
+  GROUP_NORM:
+    DIM_PER_GP: -1
+    EPSILON: 1e-05
+    NUM_GROUPS: 32
+  KEYPOINT_ON: False
+  MASK_ON: False
+  META_ARCHITECTURE: GeneralizedRCNNMEGA
+  RESNETS:
+    BACKBONE_OUT_CHANNELS: 1024
+    DEFORMABLE_GROUPS: 1
+    NUM_GROUPS: 1
+    RES2_OUT_CHANNELS: 256
+    RES5_DILATION: 2
+    STAGE_WITH_DCN: (False, False, False, False)
+    STEM_FUNC: StemWithFixedBatchNorm
+    STEM_OUT_CHANNELS: 64
+    STRIDE_IN_1X1: True
+    TRANS_FUNC: BottleneckWithFixedBatchNorm
+    WIDTH_PER_GROUP: 64
+    WITH_MODULATED_DCN: False
+  RETINANET:
+    ANCHOR_SIZES: (32, 64, 128, 256, 512)
+    ANCHOR_STRIDES: (8, 16, 32, 64, 128)
+    ASPECT_RATIOS: (0.5, 1.0, 2.0)
+    BBOX_REG_BETA: 0.11
+    BBOX_REG_WEIGHT: 4.0
+    BG_IOU_THRESHOLD: 0.4
+    FG_IOU_THRESHOLD: 0.5
+    INFERENCE_TH: 0.05
+    LOSS_ALPHA: 0.25
+    LOSS_GAMMA: 2.0
+    NMS_TH: 0.4
+    NUM_CLASSES: 81
+    NUM_CONVS: 4
+    OCTAVE: 2.0
+    PRE_NMS_TOP_N: 1000
+    PRIOR_PROB: 0.01
+    SCALES_PER_OCTAVE: 3
+    STRADDLE_THRESH: 0
+    USE_C5: True
+  RETINANET_ON: False
+  ROI_BOX_HEAD:
+    CONV_HEAD_DIM: 256
+    DILATION: 1
+    FEATURE_EXTRACTOR: MEGAFeatureExtractor
+    MLP_HEAD_DIM: 1024
+    NUM_CLASSES: 31
+    NUM_STACKED_CONVS: 4
+    POOLER_RESOLUTION: 7
+    POOLER_SAMPLING_RATIO: 0
+    POOLER_SCALES: (0.0625,)
+    PREDICTOR: FPNPredictor
+    USE_GN: False
+  ROI_HEADS:
+    BATCH_SIZE_PER_IMAGE: 128
+    BBOX_REG_WEIGHTS: (10.0, 10.0, 5.0, 5.0)
+    BG_IOU_THRESHOLD: 0.5
+    DETECTIONS_PER_IMG: 300
+    FG_IOU_THRESHOLD: 0.5
+    NMS: 0.5
+    POSITIVE_FRACTION: 0.25
+    SCORE_THRESH: 0.001
+    USE_FPN: False
+  ROI_KEYPOINT_HEAD:
+    CONV_LAYERS: (512, 512, 512, 512, 512, 512, 512, 512)
+    FEATURE_EXTRACTOR: KeypointRCNNFeatureExtractor
+    MLP_HEAD_DIM: 1024
+    NUM_CLASSES: 17
+    POOLER_RESOLUTION: 14
+    POOLER_SAMPLING_RATIO: 0
+    POOLER_SCALES: (0.0625,)
+    PREDICTOR: KeypointRCNNPredictor
+    RESOLUTION: 14
+    SHARE_BOX_FEATURE_EXTRACTOR: True
+  ROI_MASK_HEAD:
+    CONV_LAYERS: (256, 256, 256, 256)
+    DILATION: 1
+    FEATURE_EXTRACTOR: ResNet50Conv5ROIFeatureExtractor
+    MLP_HEAD_DIM: 1024
+    POOLER_RESOLUTION: 14
+    POOLER_SAMPLING_RATIO: 0
+    POOLER_SCALES: (0.0625,)
+    POSTPROCESS_MASKS: False
+    POSTPROCESS_MASKS_THRESHOLD: 0.5
+    PREDICTOR: MaskRCNNC4Predictor
+    RESOLUTION: 14
+    SHARE_BOX_FEATURE_EXTRACTOR: True
+    USE_GN: False
+  RPN:
+    ANCHOR_SIZES: (64, 128, 256, 512)
+    ANCHOR_STRIDE: (16,)
+    ASPECT_RATIOS: (0.5, 1.0, 2.0)
+    BATCH_SIZE_PER_IMAGE: 256
+    BG_IOU_THRESHOLD: 0.3
+    FG_IOU_THRESHOLD: 0.7
+    FPN_POST_NMS_PER_BATCH: True
+    FPN_POST_NMS_TOP_N_TEST: 2000
+    FPN_POST_NMS_TOP_N_TRAIN: 2000
+    MIN_SIZE: 0
+    NMS_THRESH: 0.7
+    POSITIVE_FRACTION: 0.5
+    POST_NMS_TOP_N_TEST: 300
+    POST_NMS_TOP_N_TRAIN: 300
+    PRE_NMS_TOP_N_TEST: 6000
+    PRE_NMS_TOP_N_TRAIN: 6000
+    RPN_HEAD: SingleConvRPNHead
+    STRADDLE_THRESH: 0
+    USE_FPN: False
+  RPN_ONLY: False
+  VID:
+    DFF:
+      MAX_OFFSET: 0
+      MIN_OFFSET: -9
+    ENABLE: True
+    FGFA:
+      ALL_FRAME_INTERVAL: 19
+      KEY_FRAME_LOCATION: 9
+      MAX_OFFSET: 9
+      MIN_OFFSET: -9
+      REF_NUM: 2
+    FLOWNET_WEIGHT: models/flownet.ckpt
+    IGNORE: False
+    MEGA:
+      ALL_FRAME_INTERVAL: 25
+      GLOBAL:
+        ENABLE: True
+        RES_STAGE: 1
+        SHUFFLE: True
+        SIZE: 10
+      KEY_FRAME_LOCATION: 12
+      MAX_OFFSET: 12
+      MEMORY:
+        ENABLE: True
+        SIZE: 25
+      MIN_OFFSET: -12
+      RATIO: 0.2
+      REF_NUM_GLOBAL: 2
+      REF_NUM_LOCAL: 2
+      REF_NUM_MEM: 3
+    METHOD: mega
+    RDN:
+      ALL_FRAME_INTERVAL: 37
+      KEY_FRAME_LOCATION: 18
+      MAX_OFFSET: 18
+      MIN_OFFSET: -18
+      RATIO: 0.2
+      REF_NUM: 2
+    ROI_BOX_HEAD:
+      ATTENTION:
+        ADVANCED_STAGE: 0
+        EMBED_DIM: 64
+        ENABLE: True
+        GROUP: 16
+        STAGE: 3
+      REDUCE_CHANNEL: False
+    RPN:
+      REF_POST_NMS_TOP_N: 75
+      REF_PRE_NMS_TOP_N: 6000
+  WEIGHT: catalog://ImageNetPretrained/MSRA/R-101
+OUTPUT_DIR: training_dir\MEGA_R_101_1x
+PATHS_CATALOG: c:\users\endre\pycharmprojects\dl4vsp\mega_core\config\paths_catalog.py
+SOLVER:
+  BASE_LR: 0.001
+  BIAS_LR_FACTOR: 2
+  CHECKPOINT_PERIOD: 2500
+  GAMMA: 0.1
+  IMS_PER_BATCH: 1
+  MAX_ITER: 120000
+  MOMENTUM: 0.9
+  STEPS: (80000,)
+  TEST_PERIOD: 0
+  WARMUP_FACTOR: 0.3333333333333333
+  WARMUP_ITERS: 500
+  WARMUP_METHOD: linear
+  WEIGHT_DECAY: 0.0001
+  WEIGHT_DECAY_BIAS: 0
+TEST:
+  BBOX_AUG:
+    ENABLED: False
+    H_FLIP: False
+    MAX_SIZE: 4000
+    SCALES: ()
+    SCALE_H_FLIP: False
+  DETECTIONS_PER_IMG: 300
+  EXPECTED_RESULTS: []
+  EXPECTED_RESULTS_SIGMA_TOL: 4
+  IMS_PER_BATCH: 1
+2023-11-25 20:12:11,748 mega_core INFO: Saving config into: training_dir\MEGA_R_101_1x\config.yml
+2023-11-25 21:59:02,028 mega_core INFO: Using 1 GPUs
+2023-11-25 21:59:02,029 mega_core INFO: Namespace(config_file='configs\\MEGA\\vid_R_101_C4_MEGA_1x.yaml', launcher='pytorch', local_rank=0, skip_test=False, master_port='29999', save_name='', motion_specific=True, opts=['OUTPUT_DIR', 'training_dir\\MEGA_R_101_1x'], distributed=False)
+2023-11-25 21:59:02,029 mega_core INFO: Collecting env info (might take some time)
+2023-11-25 21:59:08,675 mega_core INFO: 
+PyTorch version: 2.1.1+cpu
+Is debug build: False
+CUDA used to build PyTorch: Could not collect
+ROCM used to build PyTorch: N/A
+
+OS: Microsoft Windows 11 Home
+GCC version: (x86_64-posix-seh-rev0, Built by MinGW-W64 project) 8.1.0
+Clang version: Could not collect
+CMake version: Could not collect
+Libc version: N/A
+
+Python version: 3.9.5 (tags/v3.9.5:0a7dcbd, May  3 2021, 17:27:52) [MSC v.1928 64 bit (AMD64)] (64-bit runtime)
+Python platform: Windows-10-10.0.22621-SP0
+Is CUDA available: False
+CUDA runtime version: 11.4.120
+CUDA_MODULE_LOADING set to: N/A
+GPU models and configuration: GPU 0: NVIDIA GeForce GTX 1650 with Max-Q Design
+Nvidia driver version: 546.17
+cuDNN version: C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.4\bin\cudnn_ops_train64_8.dll
+HIP runtime version: N/A
+MIOpen runtime version: N/A
+Is XNNPACK available: True
+
+CPU:
+Architecture=9
+CurrentClockSpeed=1803
+DeviceID=CPU0
+Family=198
+L2CacheSize=1024
+L2CacheSpeed=
+Manufacturer=GenuineIntel
+MaxClockSpeed=2304
+Name=Intel(R) Core(TM) i7-10510U CPU @ 1.80GHz
+ProcessorType=3
+Revision=
+
+Versions of relevant libraries:
+[pip3] numpy==1.26.2
+[pip3] torch==2.1.1
+[pip3] torchvision==0.16.1
+[conda] blas                      1.0                         mkl  
+[conda] mkl                       2021.2.0           haa95532_296  
+[conda] mkl-service               2.3.0            py38h2bbff1b_1  
+[conda] mkl_fft                   1.3.0            py38h277e83a_2  
+[conda] mkl_random                1.2.1            py38hf11a4ad_2  
+[conda] numpy                     1.20.1           py38h34a8a5c_0  
+[conda] numpy-base                1.20.1           py38haf7ebc8_0  
+[conda] numpydoc                  1.1.0              pyhd3eb1b0_1  
+[conda] pytorch                   2.1.0           py3.8_cuda11.8_cudnn8_0    pytorch
+[conda] pytorch-cuda              11.8                 h24eeafa_5    pytorch
+[conda] pytorch-mutex             1.0                        cuda    pytorch
+[conda] torchaudio                2.1.0                    pypi_0    pypi
+[conda] torchvision               0.16.0                   pypi_0    pypi
+        Pillow (10.1.0)
+2023-11-25 21:59:08,675 mega_core INFO: Loaded configuration file configs\MEGA\vid_R_101_C4_MEGA_1x.yaml
+2023-11-25 21:59:08,676 mega_core INFO: 
+MODEL:
+  VID:
+    METHOD: "mega"
+    ROI_BOX_HEAD:
+      ATTENTION:
+        ENABLE: True
+        STAGE: 3
+  META_ARCHITECTURE: "GeneralizedRCNNMEGA"
+  WEIGHT: "catalog://ImageNetPretrained/MSRA/R-101"
+  BACKBONE:
+    CONV_BODY: "R-101-C4"
+  ROI_BOX_HEAD:
+    FEATURE_EXTRACTOR: "MEGAFeatureExtractor"
+    PREDICTOR: "FPNPredictor"
+DATASETS:
+  TRAIN: ("DET_train_30classes", "VID_train_15frames")
+  TEST: ("VID_val_videos",)
+2023-11-25 21:59:08,676 mega_core INFO: Running with config:
+AMP_VERBOSE: False
+DATALOADER:
+  ASPECT_RATIO_GROUPING: True
+  NUM_WORKERS: 4
+  SIZE_DIVISIBILITY: 0
+DATASETS:
+  TEST: ('VID_val_videos',)
+  TRAIN: ('DET_train_30classes', 'VID_train_15frames')
+DTYPE: float32
+INPUT:
+  BRIGHTNESS: 0.0
+  CONTRAST: 0.0
+  HORIZONTAL_FLIP_PROB_TRAIN: 0.5
+  HUE: 0.0
+  MAX_SIZE_TEST: 1000
+  MAX_SIZE_TRAIN: 1000
+  MIN_SIZE_TEST: 600
+  MIN_SIZE_TRAIN: (600,)
+  PIXEL_MEAN: [102.9801, 115.9465, 122.7717]
+  PIXEL_STD: [1.0, 1.0, 1.0]
+  SATURATION: 0.0
+  TO_BGR255: True
+  VERTICAL_FLIP_PROB_TRAIN: 0.0
+MODEL:
+  BACKBONE:
+    CONV_BODY: R-101-C4
+    FREEZE_CONV_BODY_AT: 2
+  CLS_AGNOSTIC_BBOX_REG: False
+  DEVICE: cuda
+  FBNET:
+    ARCH: default
+    ARCH_DEF: 
+    BN_TYPE: bn
+    DET_HEAD_BLOCKS: []
+    DET_HEAD_LAST_SCALE: 1.0
+    DET_HEAD_STRIDE: 0
+    DW_CONV_SKIP_BN: True
+    DW_CONV_SKIP_RELU: True
+    KPTS_HEAD_BLOCKS: []
+    KPTS_HEAD_LAST_SCALE: 0.0
+    KPTS_HEAD_STRIDE: 0
+    MASK_HEAD_BLOCKS: []
+    MASK_HEAD_LAST_SCALE: 0.0
+    MASK_HEAD_STRIDE: 0
+    RPN_BN_TYPE: 
+    RPN_HEAD_BLOCKS: 0
+    SCALE_FACTOR: 1.0
+    WIDTH_DIVISOR: 1
+  FPN:
+    USE_GN: False
+    USE_RELU: False
+  GROUP_NORM:
+    DIM_PER_GP: -1
+    EPSILON: 1e-05
+    NUM_GROUPS: 32
+  KEYPOINT_ON: False
+  MASK_ON: False
+  META_ARCHITECTURE: GeneralizedRCNNMEGA
+  RESNETS:
+    BACKBONE_OUT_CHANNELS: 1024
+    DEFORMABLE_GROUPS: 1
+    NUM_GROUPS: 1
+    RES2_OUT_CHANNELS: 256
+    RES5_DILATION: 2
+    STAGE_WITH_DCN: (False, False, False, False)
+    STEM_FUNC: StemWithFixedBatchNorm
+    STEM_OUT_CHANNELS: 64
+    STRIDE_IN_1X1: True
+    TRANS_FUNC: BottleneckWithFixedBatchNorm
+    WIDTH_PER_GROUP: 64
+    WITH_MODULATED_DCN: False
+  RETINANET:
+    ANCHOR_SIZES: (32, 64, 128, 256, 512)
+    ANCHOR_STRIDES: (8, 16, 32, 64, 128)
+    ASPECT_RATIOS: (0.5, 1.0, 2.0)
+    BBOX_REG_BETA: 0.11
+    BBOX_REG_WEIGHT: 4.0
+    BG_IOU_THRESHOLD: 0.4
+    FG_IOU_THRESHOLD: 0.5
+    INFERENCE_TH: 0.05
+    LOSS_ALPHA: 0.25
+    LOSS_GAMMA: 2.0
+    NMS_TH: 0.4
+    NUM_CLASSES: 81
+    NUM_CONVS: 4
+    OCTAVE: 2.0
+    PRE_NMS_TOP_N: 1000
+    PRIOR_PROB: 0.01
+    SCALES_PER_OCTAVE: 3
+    STRADDLE_THRESH: 0
+    USE_C5: True
+  RETINANET_ON: False
+  ROI_BOX_HEAD:
+    CONV_HEAD_DIM: 256
+    DILATION: 1
+    FEATURE_EXTRACTOR: MEGAFeatureExtractor
+    MLP_HEAD_DIM: 1024
+    NUM_CLASSES: 31
+    NUM_STACKED_CONVS: 4
+    POOLER_RESOLUTION: 7
+    POOLER_SAMPLING_RATIO: 0
+    POOLER_SCALES: (0.0625,)
+    PREDICTOR: FPNPredictor
+    USE_GN: False
+  ROI_HEADS:
+    BATCH_SIZE_PER_IMAGE: 128
+    BBOX_REG_WEIGHTS: (10.0, 10.0, 5.0, 5.0)
+    BG_IOU_THRESHOLD: 0.5
+    DETECTIONS_PER_IMG: 300
+    FG_IOU_THRESHOLD: 0.5
+    NMS: 0.5
+    POSITIVE_FRACTION: 0.25
+    SCORE_THRESH: 0.001
+    USE_FPN: False
+  ROI_KEYPOINT_HEAD:
+    CONV_LAYERS: (512, 512, 512, 512, 512, 512, 512, 512)
+    FEATURE_EXTRACTOR: KeypointRCNNFeatureExtractor
+    MLP_HEAD_DIM: 1024
+    NUM_CLASSES: 17
+    POOLER_RESOLUTION: 14
+    POOLER_SAMPLING_RATIO: 0
+    POOLER_SCALES: (0.0625,)
+    PREDICTOR: KeypointRCNNPredictor
+    RESOLUTION: 14
+    SHARE_BOX_FEATURE_EXTRACTOR: True
+  ROI_MASK_HEAD:
+    CONV_LAYERS: (256, 256, 256, 256)
+    DILATION: 1
+    FEATURE_EXTRACTOR: ResNet50Conv5ROIFeatureExtractor
+    MLP_HEAD_DIM: 1024
+    POOLER_RESOLUTION: 14
+    POOLER_SAMPLING_RATIO: 0
+    POOLER_SCALES: (0.0625,)
+    POSTPROCESS_MASKS: False
+    POSTPROCESS_MASKS_THRESHOLD: 0.5
+    PREDICTOR: MaskRCNNC4Predictor
+    RESOLUTION: 14
+    SHARE_BOX_FEATURE_EXTRACTOR: True
+    USE_GN: False
+  RPN:
+    ANCHOR_SIZES: (64, 128, 256, 512)
+    ANCHOR_STRIDE: (16,)
+    ASPECT_RATIOS: (0.5, 1.0, 2.0)
+    BATCH_SIZE_PER_IMAGE: 256
+    BG_IOU_THRESHOLD: 0.3
+    FG_IOU_THRESHOLD: 0.7
+    FPN_POST_NMS_PER_BATCH: True
+    FPN_POST_NMS_TOP_N_TEST: 2000
+    FPN_POST_NMS_TOP_N_TRAIN: 2000
+    MIN_SIZE: 0
+    NMS_THRESH: 0.7
+    POSITIVE_FRACTION: 0.5
+    POST_NMS_TOP_N_TEST: 300
+    POST_NMS_TOP_N_TRAIN: 300
+    PRE_NMS_TOP_N_TEST: 6000
+    PRE_NMS_TOP_N_TRAIN: 6000
+    RPN_HEAD: SingleConvRPNHead
+    STRADDLE_THRESH: 0
+    USE_FPN: False
+  RPN_ONLY: False
+  VID:
+    DFF:
+      MAX_OFFSET: 0
+      MIN_OFFSET: -9
+    ENABLE: True
+    FGFA:
+      ALL_FRAME_INTERVAL: 19
+      KEY_FRAME_LOCATION: 9
+      MAX_OFFSET: 9
+      MIN_OFFSET: -9
+      REF_NUM: 2
+    FLOWNET_WEIGHT: models/flownet.ckpt
+    IGNORE: False
+    MEGA:
+      ALL_FRAME_INTERVAL: 25
+      GLOBAL:
+        ENABLE: True
+        RES_STAGE: 1
+        SHUFFLE: True
+        SIZE: 10
+      KEY_FRAME_LOCATION: 12
+      MAX_OFFSET: 12
+      MEMORY:
+        ENABLE: True
+        SIZE: 25
+      MIN_OFFSET: -12
+      RATIO: 0.2
+      REF_NUM_GLOBAL: 2
+      REF_NUM_LOCAL: 2
+      REF_NUM_MEM: 3
+    METHOD: mega
+    RDN:
+      ALL_FRAME_INTERVAL: 37
+      KEY_FRAME_LOCATION: 18
+      MAX_OFFSET: 18
+      MIN_OFFSET: -18
+      RATIO: 0.2
+      REF_NUM: 2
+    ROI_BOX_HEAD:
+      ATTENTION:
+        ADVANCED_STAGE: 0
+        EMBED_DIM: 64
+        ENABLE: True
+        GROUP: 16
+        STAGE: 3
+      REDUCE_CHANNEL: False
+    RPN:
+      REF_POST_NMS_TOP_N: 75
+      REF_PRE_NMS_TOP_N: 6000
+  WEIGHT: catalog://ImageNetPretrained/MSRA/R-101
+OUTPUT_DIR: training_dir\MEGA_R_101_1x
+PATHS_CATALOG: c:\users\endre\pycharmprojects\dl4vsp\mega_core\config\paths_catalog.py
+SOLVER:
+  BASE_LR: 0.001
+  BIAS_LR_FACTOR: 2
+  CHECKPOINT_PERIOD: 2500
+  GAMMA: 0.1
+  IMS_PER_BATCH: 1
+  MAX_ITER: 120000
+  MOMENTUM: 0.9
+  STEPS: (80000,)
+  TEST_PERIOD: 0
+  WARMUP_FACTOR: 0.3333333333333333
+  WARMUP_ITERS: 500
+  WARMUP_METHOD: linear
+  WEIGHT_DECAY: 0.0001
+  WEIGHT_DECAY_BIAS: 0
+TEST:
+  BBOX_AUG:
+    ENABLED: False
+    H_FLIP: False
+    MAX_SIZE: 4000
+    SCALES: ()
+    SCALE_H_FLIP: False
+  DETECTIONS_PER_IMG: 300
+  EXPECTED_RESULTS: []
+  EXPECTED_RESULTS_SIGMA_TOL: 4
+  IMS_PER_BATCH: 1
+2023-11-25 21:59:08,679 mega_core INFO: Saving config into: training_dir\MEGA_R_101_1x\config.yml
+2023-11-25 22:02:55,443 mega_core INFO: Using 1 GPUs
+2023-11-25 22:02:55,443 mega_core INFO: Namespace(config_file='configs\\MEGA\\vid_R_101_C4_MEGA_1x.yaml', launcher='pytorch', local_rank=0, skip_test=False, master_port='29999', save_name='', motion_specific=True, opts=['OUTPUT_DIR', 'training_dir\\MEGA_R_101_1x'], distributed=False)
+2023-11-25 22:02:55,443 mega_core INFO: Collecting env info (might take some time)
+2023-11-25 22:03:01,000 mega_core INFO: 
+PyTorch version: 2.1.1+cpu
+Is debug build: False
+CUDA used to build PyTorch: Could not collect
+ROCM used to build PyTorch: N/A
+
+OS: Microsoft Windows 11 Home
+GCC version: (x86_64-posix-seh-rev0, Built by MinGW-W64 project) 8.1.0
+Clang version: Could not collect
+CMake version: Could not collect
+Libc version: N/A
+
+Python version: 3.9.5 (tags/v3.9.5:0a7dcbd, May  3 2021, 17:27:52) [MSC v.1928 64 bit (AMD64)] (64-bit runtime)
+Python platform: Windows-10-10.0.22621-SP0
+Is CUDA available: False
+CUDA runtime version: 11.4.120
+CUDA_MODULE_LOADING set to: N/A
+GPU models and configuration: GPU 0: NVIDIA GeForce GTX 1650 with Max-Q Design
+Nvidia driver version: 546.17
+cuDNN version: C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.4\bin\cudnn_ops_train64_8.dll
+HIP runtime version: N/A
+MIOpen runtime version: N/A
+Is XNNPACK available: True
+
+CPU:
+Architecture=9
+CurrentClockSpeed=1803
+DeviceID=CPU0
+Family=198
+L2CacheSize=1024
+L2CacheSpeed=
+Manufacturer=GenuineIntel
+MaxClockSpeed=2304
+Name=Intel(R) Core(TM) i7-10510U CPU @ 1.80GHz
+ProcessorType=3
+Revision=
+
+Versions of relevant libraries:
+[pip3] numpy==1.26.2
+[pip3] torch==2.1.1
+[pip3] torchvision==0.16.1
+[conda] blas                      1.0                         mkl  
+[conda] mkl                       2021.2.0           haa95532_296  
+[conda] mkl-service               2.3.0            py38h2bbff1b_1  
+[conda] mkl_fft                   1.3.0            py38h277e83a_2  
+[conda] mkl_random                1.2.1            py38hf11a4ad_2  
+[conda] numpy                     1.20.1           py38h34a8a5c_0  
+[conda] numpy-base                1.20.1           py38haf7ebc8_0  
+[conda] numpydoc                  1.1.0              pyhd3eb1b0_1  
+[conda] pytorch                   2.1.0           py3.8_cuda11.8_cudnn8_0    pytorch
+[conda] pytorch-cuda              11.8                 h24eeafa_5    pytorch
+[conda] pytorch-mutex             1.0                        cuda    pytorch
+[conda] torchaudio                2.1.0                    pypi_0    pypi
+[conda] torchvision               0.16.0                   pypi_0    pypi
+        Pillow (10.1.0)
+2023-11-25 22:03:01,000 mega_core INFO: Loaded configuration file configs\MEGA\vid_R_101_C4_MEGA_1x.yaml
+2023-11-25 22:03:01,001 mega_core INFO: 
+MODEL:
+  VID:
+    METHOD: "mega"
+    ROI_BOX_HEAD:
+      ATTENTION:
+        ENABLE: True
+        STAGE: 3
+  META_ARCHITECTURE: "GeneralizedRCNNMEGA"
+  WEIGHT: "catalog://ImageNetPretrained/MSRA/R-101"
+  BACKBONE:
+    CONV_BODY: "R-101-C4"
+  ROI_BOX_HEAD:
+    FEATURE_EXTRACTOR: "MEGAFeatureExtractor"
+    PREDICTOR: "FPNPredictor"
+DATASETS:
+  TRAIN: ("DET_train_30classes", "VID_train_15frames")
+  TEST: ("VID_val_videos",)
+2023-11-25 22:03:01,002 mega_core INFO: Running with config:
+AMP_VERBOSE: False
+DATALOADER:
+  ASPECT_RATIO_GROUPING: True
+  NUM_WORKERS: 4
+  SIZE_DIVISIBILITY: 0
+DATASETS:
+  TEST: ('VID_val_videos',)
+  TRAIN: ('DET_train_30classes', 'VID_train_15frames')
+DTYPE: float32
+INPUT:
+  BRIGHTNESS: 0.0
+  CONTRAST: 0.0
+  HORIZONTAL_FLIP_PROB_TRAIN: 0.5
+  HUE: 0.0
+  MAX_SIZE_TEST: 1000
+  MAX_SIZE_TRAIN: 1000
+  MIN_SIZE_TEST: 600
+  MIN_SIZE_TRAIN: (600,)
+  PIXEL_MEAN: [102.9801, 115.9465, 122.7717]
+  PIXEL_STD: [1.0, 1.0, 1.0]
+  SATURATION: 0.0
+  TO_BGR255: True
+  VERTICAL_FLIP_PROB_TRAIN: 0.0
+MODEL:
+  BACKBONE:
+    CONV_BODY: R-101-C4
+    FREEZE_CONV_BODY_AT: 2
+  CLS_AGNOSTIC_BBOX_REG: False
+  DEVICE: cuda
+  FBNET:
+    ARCH: default
+    ARCH_DEF: 
+    BN_TYPE: bn
+    DET_HEAD_BLOCKS: []
+    DET_HEAD_LAST_SCALE: 1.0
+    DET_HEAD_STRIDE: 0
+    DW_CONV_SKIP_BN: True
+    DW_CONV_SKIP_RELU: True
+    KPTS_HEAD_BLOCKS: []
+    KPTS_HEAD_LAST_SCALE: 0.0
+    KPTS_HEAD_STRIDE: 0
+    MASK_HEAD_BLOCKS: []
+    MASK_HEAD_LAST_SCALE: 0.0
+    MASK_HEAD_STRIDE: 0
+    RPN_BN_TYPE: 
+    RPN_HEAD_BLOCKS: 0
+    SCALE_FACTOR: 1.0
+    WIDTH_DIVISOR: 1
+  FPN:
+    USE_GN: False
+    USE_RELU: False
+  GROUP_NORM:
+    DIM_PER_GP: -1
+    EPSILON: 1e-05
+    NUM_GROUPS: 32
+  KEYPOINT_ON: False
+  MASK_ON: False
+  META_ARCHITECTURE: GeneralizedRCNNMEGA
+  RESNETS:
+    BACKBONE_OUT_CHANNELS: 1024
+    DEFORMABLE_GROUPS: 1
+    NUM_GROUPS: 1
+    RES2_OUT_CHANNELS: 256
+    RES5_DILATION: 2
+    STAGE_WITH_DCN: (False, False, False, False)
+    STEM_FUNC: StemWithFixedBatchNorm
+    STEM_OUT_CHANNELS: 64
+    STRIDE_IN_1X1: True
+    TRANS_FUNC: BottleneckWithFixedBatchNorm
+    WIDTH_PER_GROUP: 64
+    WITH_MODULATED_DCN: False
+  RETINANET:
+    ANCHOR_SIZES: (32, 64, 128, 256, 512)
+    ANCHOR_STRIDES: (8, 16, 32, 64, 128)
+    ASPECT_RATIOS: (0.5, 1.0, 2.0)
+    BBOX_REG_BETA: 0.11
+    BBOX_REG_WEIGHT: 4.0
+    BG_IOU_THRESHOLD: 0.4
+    FG_IOU_THRESHOLD: 0.5
+    INFERENCE_TH: 0.05
+    LOSS_ALPHA: 0.25
+    LOSS_GAMMA: 2.0
+    NMS_TH: 0.4
+    NUM_CLASSES: 81
+    NUM_CONVS: 4
+    OCTAVE: 2.0
+    PRE_NMS_TOP_N: 1000
+    PRIOR_PROB: 0.01
+    SCALES_PER_OCTAVE: 3
+    STRADDLE_THRESH: 0
+    USE_C5: True
+  RETINANET_ON: False
+  ROI_BOX_HEAD:
+    CONV_HEAD_DIM: 256
+    DILATION: 1
+    FEATURE_EXTRACTOR: MEGAFeatureExtractor
+    MLP_HEAD_DIM: 1024
+    NUM_CLASSES: 31
+    NUM_STACKED_CONVS: 4
+    POOLER_RESOLUTION: 7
+    POOLER_SAMPLING_RATIO: 0
+    POOLER_SCALES: (0.0625,)
+    PREDICTOR: FPNPredictor
+    USE_GN: False
+  ROI_HEADS:
+    BATCH_SIZE_PER_IMAGE: 128
+    BBOX_REG_WEIGHTS: (10.0, 10.0, 5.0, 5.0)
+    BG_IOU_THRESHOLD: 0.5
+    DETECTIONS_PER_IMG: 300
+    FG_IOU_THRESHOLD: 0.5
+    NMS: 0.5
+    POSITIVE_FRACTION: 0.25
+    SCORE_THRESH: 0.001
+    USE_FPN: False
+  ROI_KEYPOINT_HEAD:
+    CONV_LAYERS: (512, 512, 512, 512, 512, 512, 512, 512)
+    FEATURE_EXTRACTOR: KeypointRCNNFeatureExtractor
+    MLP_HEAD_DIM: 1024
+    NUM_CLASSES: 17
+    POOLER_RESOLUTION: 14
+    POOLER_SAMPLING_RATIO: 0
+    POOLER_SCALES: (0.0625,)
+    PREDICTOR: KeypointRCNNPredictor
+    RESOLUTION: 14
+    SHARE_BOX_FEATURE_EXTRACTOR: True
+  ROI_MASK_HEAD:
+    CONV_LAYERS: (256, 256, 256, 256)
+    DILATION: 1
+    FEATURE_EXTRACTOR: ResNet50Conv5ROIFeatureExtractor
+    MLP_HEAD_DIM: 1024
+    POOLER_RESOLUTION: 14
+    POOLER_SAMPLING_RATIO: 0
+    POOLER_SCALES: (0.0625,)
+    POSTPROCESS_MASKS: False
+    POSTPROCESS_MASKS_THRESHOLD: 0.5
+    PREDICTOR: MaskRCNNC4Predictor
+    RESOLUTION: 14
+    SHARE_BOX_FEATURE_EXTRACTOR: True
+    USE_GN: False
+  RPN:
+    ANCHOR_SIZES: (64, 128, 256, 512)
+    ANCHOR_STRIDE: (16,)
+    ASPECT_RATIOS: (0.5, 1.0, 2.0)
+    BATCH_SIZE_PER_IMAGE: 256
+    BG_IOU_THRESHOLD: 0.3
+    FG_IOU_THRESHOLD: 0.7
+    FPN_POST_NMS_PER_BATCH: True
+    FPN_POST_NMS_TOP_N_TEST: 2000
+    FPN_POST_NMS_TOP_N_TRAIN: 2000
+    MIN_SIZE: 0
+    NMS_THRESH: 0.7
+    POSITIVE_FRACTION: 0.5
+    POST_NMS_TOP_N_TEST: 300
+    POST_NMS_TOP_N_TRAIN: 300
+    PRE_NMS_TOP_N_TEST: 6000
+    PRE_NMS_TOP_N_TRAIN: 6000
+    RPN_HEAD: SingleConvRPNHead
+    STRADDLE_THRESH: 0
+    USE_FPN: False
+  RPN_ONLY: False
+  VID:
+    DFF:
+      MAX_OFFSET: 0
+      MIN_OFFSET: -9
+    ENABLE: True
+    FGFA:
+      ALL_FRAME_INTERVAL: 19
+      KEY_FRAME_LOCATION: 9
+      MAX_OFFSET: 9
+      MIN_OFFSET: -9
+      REF_NUM: 2
+    FLOWNET_WEIGHT: models/flownet.ckpt
+    IGNORE: False
+    MEGA:
+      ALL_FRAME_INTERVAL: 25
+      GLOBAL:
+        ENABLE: True
+        RES_STAGE: 1
+        SHUFFLE: True
+        SIZE: 10
+      KEY_FRAME_LOCATION: 12
+      MAX_OFFSET: 12
+      MEMORY:
+        ENABLE: True
+        SIZE: 25
+      MIN_OFFSET: -12
+      RATIO: 0.2
+      REF_NUM_GLOBAL: 2
+      REF_NUM_LOCAL: 2
+      REF_NUM_MEM: 3
+    METHOD: mega
+    RDN:
+      ALL_FRAME_INTERVAL: 37
+      KEY_FRAME_LOCATION: 18
+      MAX_OFFSET: 18
+      MIN_OFFSET: -18
+      RATIO: 0.2
+      REF_NUM: 2
+    ROI_BOX_HEAD:
+      ATTENTION:
+        ADVANCED_STAGE: 0
+        EMBED_DIM: 64
+        ENABLE: True
+        GROUP: 16
+        STAGE: 3
+      REDUCE_CHANNEL: False
+    RPN:
+      REF_POST_NMS_TOP_N: 75
+      REF_PRE_NMS_TOP_N: 6000
+  WEIGHT: catalog://ImageNetPretrained/MSRA/R-101
+OUTPUT_DIR: training_dir\MEGA_R_101_1x
+PATHS_CATALOG: c:\users\endre\pycharmprojects\dl4vsp\mega_core\config\paths_catalog.py
+SOLVER:
+  BASE_LR: 0.001
+  BIAS_LR_FACTOR: 2
+  CHECKPOINT_PERIOD: 2500
+  GAMMA: 0.1
+  IMS_PER_BATCH: 1
+  MAX_ITER: 120000
+  MOMENTUM: 0.9
+  STEPS: (80000,)
+  TEST_PERIOD: 0
+  WARMUP_FACTOR: 0.3333333333333333
+  WARMUP_ITERS: 500
+  WARMUP_METHOD: linear
+  WEIGHT_DECAY: 0.0001
+  WEIGHT_DECAY_BIAS: 0
+TEST:
+  BBOX_AUG:
+    ENABLED: False
+    H_FLIP: False
+    MAX_SIZE: 4000
+    SCALES: ()
+    SCALE_H_FLIP: False
+  DETECTIONS_PER_IMG: 300
+  EXPECTED_RESULTS: []
+  EXPECTED_RESULTS_SIGMA_TOL: 4
+  IMS_PER_BATCH: 1
+2023-11-25 22:03:01,005 mega_core INFO: Saving config into: training_dir\MEGA_R_101_1x\config.yml
+2023-11-25 22:10:08,581 mega_core INFO: Using 1 GPUs
+2023-11-25 22:10:08,582 mega_core INFO: Namespace(config_file='configs\\MEGA\\vid_R_101_C4_MEGA_1x.yaml', launcher='pytorch', local_rank=0, skip_test=False, master_port='29999', save_name='', motion_specific=True, opts=['OUTPUT_DIR', 'training_dir\\MEGA_R_101_1x'], distributed=False)
+2023-11-25 22:10:08,582 mega_core INFO: Collecting env info (might take some time)
+2023-11-25 22:10:13,966 mega_core INFO: 
+PyTorch version: 2.1.1+cpu
+Is debug build: False
+CUDA used to build PyTorch: Could not collect
+ROCM used to build PyTorch: N/A
+
+OS: Microsoft Windows 11 Home
+GCC version: (x86_64-posix-seh-rev0, Built by MinGW-W64 project) 8.1.0
+Clang version: Could not collect
+CMake version: Could not collect
+Libc version: N/A
+
+Python version: 3.9.5 (tags/v3.9.5:0a7dcbd, May  3 2021, 17:27:52) [MSC v.1928 64 bit (AMD64)] (64-bit runtime)
+Python platform: Windows-10-10.0.22621-SP0
+Is CUDA available: False
+CUDA runtime version: 11.4.120
+CUDA_MODULE_LOADING set to: N/A
+GPU models and configuration: GPU 0: NVIDIA GeForce GTX 1650 with Max-Q Design
+Nvidia driver version: 546.17
+cuDNN version: C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.4\bin\cudnn_ops_train64_8.dll
+HIP runtime version: N/A
+MIOpen runtime version: N/A
+Is XNNPACK available: True
+
+CPU:
+Architecture=9
+CurrentClockSpeed=1803
+DeviceID=CPU0
+Family=198
+L2CacheSize=1024
+L2CacheSpeed=
+Manufacturer=GenuineIntel
+MaxClockSpeed=2304
+Name=Intel(R) Core(TM) i7-10510U CPU @ 1.80GHz
+ProcessorType=3
+Revision=
+
+Versions of relevant libraries:
+[pip3] numpy==1.26.2
+[pip3] torch==2.1.1
+[pip3] torchvision==0.16.1
+[conda] blas                      1.0                         mkl  
+[conda] mkl                       2021.2.0           haa95532_296  
+[conda] mkl-service               2.3.0            py38h2bbff1b_1  
+[conda] mkl_fft                   1.3.0            py38h277e83a_2  
+[conda] mkl_random                1.2.1            py38hf11a4ad_2  
+[conda] numpy                     1.20.1           py38h34a8a5c_0  
+[conda] numpy-base                1.20.1           py38haf7ebc8_0  
+[conda] numpydoc                  1.1.0              pyhd3eb1b0_1  
+[conda] pytorch                   2.1.0           py3.8_cuda11.8_cudnn8_0    pytorch
+[conda] pytorch-cuda              11.8                 h24eeafa_5    pytorch
+[conda] pytorch-mutex             1.0                        cuda    pytorch
+[conda] torchaudio                2.1.0                    pypi_0    pypi
+[conda] torchvision               0.16.0                   pypi_0    pypi
+        Pillow (10.1.0)
+2023-11-25 22:10:13,967 mega_core INFO: Loaded configuration file configs\MEGA\vid_R_101_C4_MEGA_1x.yaml
+2023-11-25 22:10:13,967 mega_core INFO: 
+MODEL:
+  VID:
+    METHOD: "mega"
+    ROI_BOX_HEAD:
+      ATTENTION:
+        ENABLE: True
+        STAGE: 3
+  META_ARCHITECTURE: "GeneralizedRCNNMEGA"
+  WEIGHT: "catalog://ImageNetPretrained/MSRA/R-101"
+  BACKBONE:
+    CONV_BODY: "R-101-C4"
+  ROI_BOX_HEAD:
+    FEATURE_EXTRACTOR: "MEGAFeatureExtractor"
+    PREDICTOR: "FPNPredictor"
+DATASETS:
+  TRAIN: ("DET_train_30classes", "VID_train_15frames")
+  TEST: ("VID_val_videos",)
+2023-11-25 22:10:13,969 mega_core INFO: Running with config:
+AMP_VERBOSE: False
+DATALOADER:
+  ASPECT_RATIO_GROUPING: True
+  NUM_WORKERS: 4
+  SIZE_DIVISIBILITY: 0
+DATASETS:
+  TEST: ('VID_val_videos',)
+  TRAIN: ('DET_train_30classes', 'VID_train_15frames')
+DTYPE: float32
+INPUT:
+  BRIGHTNESS: 0.0
+  CONTRAST: 0.0
+  HORIZONTAL_FLIP_PROB_TRAIN: 0.5
+  HUE: 0.0
+  MAX_SIZE_TEST: 1000
+  MAX_SIZE_TRAIN: 1000
+  MIN_SIZE_TEST: 600
+  MIN_SIZE_TRAIN: (600,)
+  PIXEL_MEAN: [102.9801, 115.9465, 122.7717]
+  PIXEL_STD: [1.0, 1.0, 1.0]
+  SATURATION: 0.0
+  TO_BGR255: True
+  VERTICAL_FLIP_PROB_TRAIN: 0.0
+MODEL:
+  BACKBONE:
+    CONV_BODY: R-101-C4
+    FREEZE_CONV_BODY_AT: 2
+  CLS_AGNOSTIC_BBOX_REG: False
+  DEVICE: cuda
+  FBNET:
+    ARCH: default
+    ARCH_DEF: 
+    BN_TYPE: bn
+    DET_HEAD_BLOCKS: []
+    DET_HEAD_LAST_SCALE: 1.0
+    DET_HEAD_STRIDE: 0
+    DW_CONV_SKIP_BN: True
+    DW_CONV_SKIP_RELU: True
+    KPTS_HEAD_BLOCKS: []
+    KPTS_HEAD_LAST_SCALE: 0.0
+    KPTS_HEAD_STRIDE: 0
+    MASK_HEAD_BLOCKS: []
+    MASK_HEAD_LAST_SCALE: 0.0
+    MASK_HEAD_STRIDE: 0
+    RPN_BN_TYPE: 
+    RPN_HEAD_BLOCKS: 0
+    SCALE_FACTOR: 1.0
+    WIDTH_DIVISOR: 1
+  FPN:
+    USE_GN: False
+    USE_RELU: False
+  GROUP_NORM:
+    DIM_PER_GP: -1
+    EPSILON: 1e-05
+    NUM_GROUPS: 32
+  KEYPOINT_ON: False
+  MASK_ON: False
+  META_ARCHITECTURE: GeneralizedRCNNMEGA
+  RESNETS:
+    BACKBONE_OUT_CHANNELS: 1024
+    DEFORMABLE_GROUPS: 1
+    NUM_GROUPS: 1
+    RES2_OUT_CHANNELS: 256
+    RES5_DILATION: 2
+    STAGE_WITH_DCN: (False, False, False, False)
+    STEM_FUNC: StemWithFixedBatchNorm
+    STEM_OUT_CHANNELS: 64
+    STRIDE_IN_1X1: True
+    TRANS_FUNC: BottleneckWithFixedBatchNorm
+    WIDTH_PER_GROUP: 64
+    WITH_MODULATED_DCN: False
+  RETINANET:
+    ANCHOR_SIZES: (32, 64, 128, 256, 512)
+    ANCHOR_STRIDES: (8, 16, 32, 64, 128)
+    ASPECT_RATIOS: (0.5, 1.0, 2.0)
+    BBOX_REG_BETA: 0.11
+    BBOX_REG_WEIGHT: 4.0
+    BG_IOU_THRESHOLD: 0.4
+    FG_IOU_THRESHOLD: 0.5
+    INFERENCE_TH: 0.05
+    LOSS_ALPHA: 0.25
+    LOSS_GAMMA: 2.0
+    NMS_TH: 0.4
+    NUM_CLASSES: 81
+    NUM_CONVS: 4
+    OCTAVE: 2.0
+    PRE_NMS_TOP_N: 1000
+    PRIOR_PROB: 0.01
+    SCALES_PER_OCTAVE: 3
+    STRADDLE_THRESH: 0
+    USE_C5: True
+  RETINANET_ON: False
+  ROI_BOX_HEAD:
+    CONV_HEAD_DIM: 256
+    DILATION: 1
+    FEATURE_EXTRACTOR: MEGAFeatureExtractor
+    MLP_HEAD_DIM: 1024
+    NUM_CLASSES: 31
+    NUM_STACKED_CONVS: 4
+    POOLER_RESOLUTION: 7
+    POOLER_SAMPLING_RATIO: 0
+    POOLER_SCALES: (0.0625,)
+    PREDICTOR: FPNPredictor
+    USE_GN: False
+  ROI_HEADS:
+    BATCH_SIZE_PER_IMAGE: 128
+    BBOX_REG_WEIGHTS: (10.0, 10.0, 5.0, 5.0)
+    BG_IOU_THRESHOLD: 0.5
+    DETECTIONS_PER_IMG: 300
+    FG_IOU_THRESHOLD: 0.5
+    NMS: 0.5
+    POSITIVE_FRACTION: 0.25
+    SCORE_THRESH: 0.001
+    USE_FPN: False
+  ROI_KEYPOINT_HEAD:
+    CONV_LAYERS: (512, 512, 512, 512, 512, 512, 512, 512)
+    FEATURE_EXTRACTOR: KeypointRCNNFeatureExtractor
+    MLP_HEAD_DIM: 1024
+    NUM_CLASSES: 17
+    POOLER_RESOLUTION: 14
+    POOLER_SAMPLING_RATIO: 0
+    POOLER_SCALES: (0.0625,)
+    PREDICTOR: KeypointRCNNPredictor
+    RESOLUTION: 14
+    SHARE_BOX_FEATURE_EXTRACTOR: True
+  ROI_MASK_HEAD:
+    CONV_LAYERS: (256, 256, 256, 256)
+    DILATION: 1
+    FEATURE_EXTRACTOR: ResNet50Conv5ROIFeatureExtractor
+    MLP_HEAD_DIM: 1024
+    POOLER_RESOLUTION: 14
+    POOLER_SAMPLING_RATIO: 0
+    POOLER_SCALES: (0.0625,)
+    POSTPROCESS_MASKS: False
+    POSTPROCESS_MASKS_THRESHOLD: 0.5
+    PREDICTOR: MaskRCNNC4Predictor
+    RESOLUTION: 14
+    SHARE_BOX_FEATURE_EXTRACTOR: True
+    USE_GN: False
+  RPN:
+    ANCHOR_SIZES: (64, 128, 256, 512)
+    ANCHOR_STRIDE: (16,)
+    ASPECT_RATIOS: (0.5, 1.0, 2.0)
+    BATCH_SIZE_PER_IMAGE: 256
+    BG_IOU_THRESHOLD: 0.3
+    FG_IOU_THRESHOLD: 0.7
+    FPN_POST_NMS_PER_BATCH: True
+    FPN_POST_NMS_TOP_N_TEST: 2000
+    FPN_POST_NMS_TOP_N_TRAIN: 2000
+    MIN_SIZE: 0
+    NMS_THRESH: 0.7
+    POSITIVE_FRACTION: 0.5
+    POST_NMS_TOP_N_TEST: 300
+    POST_NMS_TOP_N_TRAIN: 300
+    PRE_NMS_TOP_N_TEST: 6000
+    PRE_NMS_TOP_N_TRAIN: 6000
+    RPN_HEAD: SingleConvRPNHead
+    STRADDLE_THRESH: 0
+    USE_FPN: False
+  RPN_ONLY: False
+  VID:
+    DFF:
+      MAX_OFFSET: 0
+      MIN_OFFSET: -9
+    ENABLE: True
+    FGFA:
+      ALL_FRAME_INTERVAL: 19
+      KEY_FRAME_LOCATION: 9
+      MAX_OFFSET: 9
+      MIN_OFFSET: -9
+      REF_NUM: 2
+    FLOWNET_WEIGHT: models/flownet.ckpt
+    IGNORE: False
+    MEGA:
+      ALL_FRAME_INTERVAL: 25
+      GLOBAL:
+        ENABLE: True
+        RES_STAGE: 1
+        SHUFFLE: True
+        SIZE: 10
+      KEY_FRAME_LOCATION: 12
+      MAX_OFFSET: 12
+      MEMORY:
+        ENABLE: True
+        SIZE: 25
+      MIN_OFFSET: -12
+      RATIO: 0.2
+      REF_NUM_GLOBAL: 2
+      REF_NUM_LOCAL: 2
+      REF_NUM_MEM: 3
+    METHOD: mega
+    RDN:
+      ALL_FRAME_INTERVAL: 37
+      KEY_FRAME_LOCATION: 18
+      MAX_OFFSET: 18
+      MIN_OFFSET: -18
+      RATIO: 0.2
+      REF_NUM: 2
+    ROI_BOX_HEAD:
+      ATTENTION:
+        ADVANCED_STAGE: 0
+        EMBED_DIM: 64
+        ENABLE: True
+        GROUP: 16
+        STAGE: 3
+      REDUCE_CHANNEL: False
+    RPN:
+      REF_POST_NMS_TOP_N: 75
+      REF_PRE_NMS_TOP_N: 6000
+  WEIGHT: catalog://ImageNetPretrained/MSRA/R-101
+OUTPUT_DIR: training_dir\MEGA_R_101_1x
+PATHS_CATALOG: c:\users\endre\pycharmprojects\dl4vsp\mega_core\config\paths_catalog.py
+SOLVER:
+  BASE_LR: 0.001
+  BIAS_LR_FACTOR: 2
+  CHECKPOINT_PERIOD: 2500
+  GAMMA: 0.1
+  IMS_PER_BATCH: 1
+  MAX_ITER: 120000
+  MOMENTUM: 0.9
+  STEPS: (80000,)
+  TEST_PERIOD: 0
+  WARMUP_FACTOR: 0.3333333333333333
+  WARMUP_ITERS: 500
+  WARMUP_METHOD: linear
+  WEIGHT_DECAY: 0.0001
+  WEIGHT_DECAY_BIAS: 0
+TEST:
+  BBOX_AUG:
+    ENABLED: False
+    H_FLIP: False
+    MAX_SIZE: 4000
+    SCALES: ()
+    SCALE_H_FLIP: False
+  DETECTIONS_PER_IMG: 300
+  EXPECTED_RESULTS: []
+  EXPECTED_RESULTS_SIGMA_TOL: 4
+  IMS_PER_BATCH: 1
+2023-11-25 22:10:13,971 mega_core INFO: Saving config into: training_dir\MEGA_R_101_1x\config.yml
+2023-11-25 22:12:21,178 mega_core INFO: Using 1 GPUs
+2023-11-25 22:12:21,178 mega_core INFO: Namespace(config_file='configs\\MEGA\\vid_R_101_C4_MEGA_1x.yaml', launcher='pytorch', local_rank=0, skip_test=False, master_port='29999', save_name='', motion_specific=True, opts=['OUTPUT_DIR', 'training_dir\\MEGA_R_101_1x'], distributed=False)
+2023-11-25 22:12:21,179 mega_core INFO: Collecting env info (might take some time)
+2023-11-25 22:12:26,552 mega_core INFO: 
+PyTorch version: 2.1.1+cpu
+Is debug build: False
+CUDA used to build PyTorch: Could not collect
+ROCM used to build PyTorch: N/A
+
+OS: Microsoft Windows 11 Home
+GCC version: (x86_64-posix-seh-rev0, Built by MinGW-W64 project) 8.1.0
+Clang version: Could not collect
+CMake version: Could not collect
+Libc version: N/A
+
+Python version: 3.9.5 (tags/v3.9.5:0a7dcbd, May  3 2021, 17:27:52) [MSC v.1928 64 bit (AMD64)] (64-bit runtime)
+Python platform: Windows-10-10.0.22621-SP0
+Is CUDA available: False
+CUDA runtime version: 11.4.120
+CUDA_MODULE_LOADING set to: N/A
+GPU models and configuration: GPU 0: NVIDIA GeForce GTX 1650 with Max-Q Design
+Nvidia driver version: 546.17
+cuDNN version: C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.4\bin\cudnn_ops_train64_8.dll
+HIP runtime version: N/A
+MIOpen runtime version: N/A
+Is XNNPACK available: True
+
+CPU:
+Architecture=9
+CurrentClockSpeed=1803
+DeviceID=CPU0
+Family=198
+L2CacheSize=1024
+L2CacheSpeed=
+Manufacturer=GenuineIntel
+MaxClockSpeed=2304
+Name=Intel(R) Core(TM) i7-10510U CPU @ 1.80GHz
+ProcessorType=3
+Revision=
+
+Versions of relevant libraries:
+[pip3] numpy==1.26.2
+[pip3] torch==2.1.1
+[pip3] torchvision==0.16.1
+[conda] blas                      1.0                         mkl  
+[conda] mkl                       2021.2.0           haa95532_296  
+[conda] mkl-service               2.3.0            py38h2bbff1b_1  
+[conda] mkl_fft                   1.3.0            py38h277e83a_2  
+[conda] mkl_random                1.2.1            py38hf11a4ad_2  
+[conda] numpy                     1.20.1           py38h34a8a5c_0  
+[conda] numpy-base                1.20.1           py38haf7ebc8_0  
+[conda] numpydoc                  1.1.0              pyhd3eb1b0_1  
+[conda] pytorch                   2.1.0           py3.8_cuda11.8_cudnn8_0    pytorch
+[conda] pytorch-cuda              11.8                 h24eeafa_5    pytorch
+[conda] pytorch-mutex             1.0                        cuda    pytorch
+[conda] torchaudio                2.1.0                    pypi_0    pypi
+[conda] torchvision               0.16.0                   pypi_0    pypi
+        Pillow (10.1.0)
+2023-11-25 22:12:26,553 mega_core INFO: Loaded configuration file configs\MEGA\vid_R_101_C4_MEGA_1x.yaml
+2023-11-25 22:12:26,553 mega_core INFO: 
+MODEL:
+  VID:
+    METHOD: "mega"
+    ROI_BOX_HEAD:
+      ATTENTION:
+        ENABLE: True
+        STAGE: 3
+  META_ARCHITECTURE: "GeneralizedRCNNMEGA"
+  WEIGHT: "catalog://ImageNetPretrained/MSRA/R-101"
+  BACKBONE:
+    CONV_BODY: "R-101-C4"
+  ROI_BOX_HEAD:
+    FEATURE_EXTRACTOR: "MEGAFeatureExtractor"
+    PREDICTOR: "FPNPredictor"
+DATASETS:
+  TRAIN: ("DET_train_30classes", "VID_train_15frames")
+  TEST: ("VID_val_videos",)
+2023-11-25 22:12:26,554 mega_core INFO: Running with config:
+AMP_VERBOSE: False
+DATALOADER:
+  ASPECT_RATIO_GROUPING: True
+  NUM_WORKERS: 4
+  SIZE_DIVISIBILITY: 0
+DATASETS:
+  TEST: ('VID_val_videos',)
+  TRAIN: ('DET_train_30classes', 'VID_train_15frames')
+DTYPE: float32
+INPUT:
+  BRIGHTNESS: 0.0
+  CONTRAST: 0.0
+  HORIZONTAL_FLIP_PROB_TRAIN: 0.5
+  HUE: 0.0
+  MAX_SIZE_TEST: 1000
+  MAX_SIZE_TRAIN: 1000
+  MIN_SIZE_TEST: 600
+  MIN_SIZE_TRAIN: (600,)
+  PIXEL_MEAN: [102.9801, 115.9465, 122.7717]
+  PIXEL_STD: [1.0, 1.0, 1.0]
+  SATURATION: 0.0
+  TO_BGR255: True
+  VERTICAL_FLIP_PROB_TRAIN: 0.0
+MODEL:
+  BACKBONE:
+    CONV_BODY: R-101-C4
+    FREEZE_CONV_BODY_AT: 2
+  CLS_AGNOSTIC_BBOX_REG: False
+  DEVICE: cuda
+  FBNET:
+    ARCH: default
+    ARCH_DEF: 
+    BN_TYPE: bn
+    DET_HEAD_BLOCKS: []
+    DET_HEAD_LAST_SCALE: 1.0
+    DET_HEAD_STRIDE: 0
+    DW_CONV_SKIP_BN: True
+    DW_CONV_SKIP_RELU: True
+    KPTS_HEAD_BLOCKS: []
+    KPTS_HEAD_LAST_SCALE: 0.0
+    KPTS_HEAD_STRIDE: 0
+    MASK_HEAD_BLOCKS: []
+    MASK_HEAD_LAST_SCALE: 0.0
+    MASK_HEAD_STRIDE: 0
+    RPN_BN_TYPE: 
+    RPN_HEAD_BLOCKS: 0
+    SCALE_FACTOR: 1.0
+    WIDTH_DIVISOR: 1
+  FPN:
+    USE_GN: False
+    USE_RELU: False
+  GROUP_NORM:
+    DIM_PER_GP: -1
+    EPSILON: 1e-05
+    NUM_GROUPS: 32
+  KEYPOINT_ON: False
+  MASK_ON: False
+  META_ARCHITECTURE: GeneralizedRCNNMEGA
+  RESNETS:
+    BACKBONE_OUT_CHANNELS: 1024
+    DEFORMABLE_GROUPS: 1
+    NUM_GROUPS: 1
+    RES2_OUT_CHANNELS: 256
+    RES5_DILATION: 2
+    STAGE_WITH_DCN: (False, False, False, False)
+    STEM_FUNC: StemWithFixedBatchNorm
+    STEM_OUT_CHANNELS: 64
+    STRIDE_IN_1X1: True
+    TRANS_FUNC: BottleneckWithFixedBatchNorm
+    WIDTH_PER_GROUP: 64
+    WITH_MODULATED_DCN: False
+  RETINANET:
+    ANCHOR_SIZES: (32, 64, 128, 256, 512)
+    ANCHOR_STRIDES: (8, 16, 32, 64, 128)
+    ASPECT_RATIOS: (0.5, 1.0, 2.0)
+    BBOX_REG_BETA: 0.11
+    BBOX_REG_WEIGHT: 4.0
+    BG_IOU_THRESHOLD: 0.4
+    FG_IOU_THRESHOLD: 0.5
+    INFERENCE_TH: 0.05
+    LOSS_ALPHA: 0.25
+    LOSS_GAMMA: 2.0
+    NMS_TH: 0.4
+    NUM_CLASSES: 81
+    NUM_CONVS: 4
+    OCTAVE: 2.0
+    PRE_NMS_TOP_N: 1000
+    PRIOR_PROB: 0.01
+    SCALES_PER_OCTAVE: 3
+    STRADDLE_THRESH: 0
+    USE_C5: True
+  RETINANET_ON: False
+  ROI_BOX_HEAD:
+    CONV_HEAD_DIM: 256
+    DILATION: 1
+    FEATURE_EXTRACTOR: MEGAFeatureExtractor
+    MLP_HEAD_DIM: 1024
+    NUM_CLASSES: 31
+    NUM_STACKED_CONVS: 4
+    POOLER_RESOLUTION: 7
+    POOLER_SAMPLING_RATIO: 0
+    POOLER_SCALES: (0.0625,)
+    PREDICTOR: FPNPredictor
+    USE_GN: False
+  ROI_HEADS:
+    BATCH_SIZE_PER_IMAGE: 128
+    BBOX_REG_WEIGHTS: (10.0, 10.0, 5.0, 5.0)
+    BG_IOU_THRESHOLD: 0.5
+    DETECTIONS_PER_IMG: 300
+    FG_IOU_THRESHOLD: 0.5
+    NMS: 0.5
+    POSITIVE_FRACTION: 0.25
+    SCORE_THRESH: 0.001
+    USE_FPN: False
+  ROI_KEYPOINT_HEAD:
+    CONV_LAYERS: (512, 512, 512, 512, 512, 512, 512, 512)
+    FEATURE_EXTRACTOR: KeypointRCNNFeatureExtractor
+    MLP_HEAD_DIM: 1024
+    NUM_CLASSES: 17
+    POOLER_RESOLUTION: 14
+    POOLER_SAMPLING_RATIO: 0
+    POOLER_SCALES: (0.0625,)
+    PREDICTOR: KeypointRCNNPredictor
+    RESOLUTION: 14
+    SHARE_BOX_FEATURE_EXTRACTOR: True
+  ROI_MASK_HEAD:
+    CONV_LAYERS: (256, 256, 256, 256)
+    DILATION: 1
+    FEATURE_EXTRACTOR: ResNet50Conv5ROIFeatureExtractor
+    MLP_HEAD_DIM: 1024
+    POOLER_RESOLUTION: 14
+    POOLER_SAMPLING_RATIO: 0
+    POOLER_SCALES: (0.0625,)
+    POSTPROCESS_MASKS: False
+    POSTPROCESS_MASKS_THRESHOLD: 0.5
+    PREDICTOR: MaskRCNNC4Predictor
+    RESOLUTION: 14
+    SHARE_BOX_FEATURE_EXTRACTOR: True
+    USE_GN: False
+  RPN:
+    ANCHOR_SIZES: (64, 128, 256, 512)
+    ANCHOR_STRIDE: (16,)
+    ASPECT_RATIOS: (0.5, 1.0, 2.0)
+    BATCH_SIZE_PER_IMAGE: 256
+    BG_IOU_THRESHOLD: 0.3
+    FG_IOU_THRESHOLD: 0.7
+    FPN_POST_NMS_PER_BATCH: True
+    FPN_POST_NMS_TOP_N_TEST: 2000
+    FPN_POST_NMS_TOP_N_TRAIN: 2000
+    MIN_SIZE: 0
+    NMS_THRESH: 0.7
+    POSITIVE_FRACTION: 0.5
+    POST_NMS_TOP_N_TEST: 300
+    POST_NMS_TOP_N_TRAIN: 300
+    PRE_NMS_TOP_N_TEST: 6000
+    PRE_NMS_TOP_N_TRAIN: 6000
+    RPN_HEAD: SingleConvRPNHead
+    STRADDLE_THRESH: 0
+    USE_FPN: False
+  RPN_ONLY: False
+  VID:
+    DFF:
+      MAX_OFFSET: 0
+      MIN_OFFSET: -9
+    ENABLE: True
+    FGFA:
+      ALL_FRAME_INTERVAL: 19
+      KEY_FRAME_LOCATION: 9
+      MAX_OFFSET: 9
+      MIN_OFFSET: -9
+      REF_NUM: 2
+    FLOWNET_WEIGHT: models/flownet.ckpt
+    IGNORE: False
+    MEGA:
+      ALL_FRAME_INTERVAL: 25
+      GLOBAL:
+        ENABLE: True
+        RES_STAGE: 1
+        SHUFFLE: True
+        SIZE: 10
+      KEY_FRAME_LOCATION: 12
+      MAX_OFFSET: 12
+      MEMORY:
+        ENABLE: True
+        SIZE: 25
+      MIN_OFFSET: -12
+      RATIO: 0.2
+      REF_NUM_GLOBAL: 2
+      REF_NUM_LOCAL: 2
+      REF_NUM_MEM: 3
+    METHOD: mega
+    RDN:
+      ALL_FRAME_INTERVAL: 37
+      KEY_FRAME_LOCATION: 18
+      MAX_OFFSET: 18
+      MIN_OFFSET: -18
+      RATIO: 0.2
+      REF_NUM: 2
+    ROI_BOX_HEAD:
+      ATTENTION:
+        ADVANCED_STAGE: 0
+        EMBED_DIM: 64
+        ENABLE: True
+        GROUP: 16
+        STAGE: 3
+      REDUCE_CHANNEL: False
+    RPN:
+      REF_POST_NMS_TOP_N: 75
+      REF_PRE_NMS_TOP_N: 6000
+  WEIGHT: catalog://ImageNetPretrained/MSRA/R-101
+OUTPUT_DIR: training_dir\MEGA_R_101_1x
+PATHS_CATALOG: c:\users\endre\pycharmprojects\dl4vsp\mega_core\config\paths_catalog.py
+SOLVER:
+  BASE_LR: 0.001
+  BIAS_LR_FACTOR: 2
+  CHECKPOINT_PERIOD: 2500
+  GAMMA: 0.1
+  IMS_PER_BATCH: 1
+  MAX_ITER: 120000
+  MOMENTUM: 0.9
+  STEPS: (80000,)
+  TEST_PERIOD: 0
+  WARMUP_FACTOR: 0.3333333333333333
+  WARMUP_ITERS: 500
+  WARMUP_METHOD: linear
+  WEIGHT_DECAY: 0.0001
+  WEIGHT_DECAY_BIAS: 0
+TEST:
+  BBOX_AUG:
+    ENABLED: False
+    H_FLIP: False
+    MAX_SIZE: 4000
+    SCALES: ()
+    SCALE_H_FLIP: False
+  DETECTIONS_PER_IMG: 300
+  EXPECTED_RESULTS: []
+  EXPECTED_RESULTS_SIGMA_TOL: 4
+  IMS_PER_BATCH: 1
+2023-11-25 22:12:26,557 mega_core INFO: Saving config into: training_dir\MEGA_R_101_1x\config.yml
+2023-11-25 22:13:56,537 mega_core INFO: Using 1 GPUs
+2023-11-25 22:13:56,537 mega_core INFO: Namespace(config_file='configs\\MEGA\\vid_R_101_C4_MEGA_1x.yaml', launcher='pytorch', local_rank=0, skip_test=False, master_port='29999', save_name='', motion_specific=True, opts=['OUTPUT_DIR', 'training_dir\\MEGA_R_101_1x'], distributed=False)
+2023-11-25 22:13:56,537 mega_core INFO: Collecting env info (might take some time)
+2023-11-25 22:14:01,978 mega_core INFO: 
+PyTorch version: 2.1.1+cpu
+Is debug build: False
+CUDA used to build PyTorch: Could not collect
+ROCM used to build PyTorch: N/A
+
+OS: Microsoft Windows 11 Home
+GCC version: (x86_64-posix-seh-rev0, Built by MinGW-W64 project) 8.1.0
+Clang version: Could not collect
+CMake version: Could not collect
+Libc version: N/A
+
+Python version: 3.9.5 (tags/v3.9.5:0a7dcbd, May  3 2021, 17:27:52) [MSC v.1928 64 bit (AMD64)] (64-bit runtime)
+Python platform: Windows-10-10.0.22621-SP0
+Is CUDA available: False
+CUDA runtime version: 11.4.120
+CUDA_MODULE_LOADING set to: N/A
+GPU models and configuration: GPU 0: NVIDIA GeForce GTX 1650 with Max-Q Design
+Nvidia driver version: 546.17
+cuDNN version: C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.4\bin\cudnn_ops_train64_8.dll
+HIP runtime version: N/A
+MIOpen runtime version: N/A
+Is XNNPACK available: True
+
+CPU:
+Architecture=9
+CurrentClockSpeed=1803
+DeviceID=CPU0
+Family=198
+L2CacheSize=1024
+L2CacheSpeed=
+Manufacturer=GenuineIntel
+MaxClockSpeed=2304
+Name=Intel(R) Core(TM) i7-10510U CPU @ 1.80GHz
+ProcessorType=3
+Revision=
+
+Versions of relevant libraries:
+[pip3] numpy==1.26.2
+[pip3] torch==2.1.1
+[pip3] torchvision==0.16.1
+[conda] blas                      1.0                         mkl  
+[conda] mkl                       2021.2.0           haa95532_296  
+[conda] mkl-service               2.3.0            py38h2bbff1b_1  
+[conda] mkl_fft                   1.3.0            py38h277e83a_2  
+[conda] mkl_random                1.2.1            py38hf11a4ad_2  
+[conda] numpy                     1.20.1           py38h34a8a5c_0  
+[conda] numpy-base                1.20.1           py38haf7ebc8_0  
+[conda] numpydoc                  1.1.0              pyhd3eb1b0_1  
+[conda] pytorch                   2.1.0           py3.8_cuda11.8_cudnn8_0    pytorch
+[conda] pytorch-cuda              11.8                 h24eeafa_5    pytorch
+[conda] pytorch-mutex             1.0                        cuda    pytorch
+[conda] torchaudio                2.1.0                    pypi_0    pypi
+[conda] torchvision               0.16.0                   pypi_0    pypi
+        Pillow (10.1.0)
+2023-11-25 22:14:01,979 mega_core INFO: Loaded configuration file configs\MEGA\vid_R_101_C4_MEGA_1x.yaml
+2023-11-25 22:14:01,979 mega_core INFO: 
+MODEL:
+  VID:
+    METHOD: "mega"
+    ROI_BOX_HEAD:
+      ATTENTION:
+        ENABLE: True
+        STAGE: 3
+  META_ARCHITECTURE: "GeneralizedRCNNMEGA"
+  WEIGHT: "catalog://ImageNetPretrained/MSRA/R-101"
+  BACKBONE:
+    CONV_BODY: "R-101-C4"
+  ROI_BOX_HEAD:
+    FEATURE_EXTRACTOR: "MEGAFeatureExtractor"
+    PREDICTOR: "FPNPredictor"
+DATASETS:
+  TRAIN: ("DET_train_30classes", "VID_train_15frames")
+  TEST: ("VID_val_videos",)
+2023-11-25 22:14:01,979 mega_core INFO: Running with config:
+AMP_VERBOSE: False
+DATALOADER:
+  ASPECT_RATIO_GROUPING: True
+  NUM_WORKERS: 4
+  SIZE_DIVISIBILITY: 0
+DATASETS:
+  TEST: ('VID_val_videos',)
+  TRAIN: ('DET_train_30classes', 'VID_train_15frames')
+DTYPE: float32
+INPUT:
+  BRIGHTNESS: 0.0
+  CONTRAST: 0.0
+  HORIZONTAL_FLIP_PROB_TRAIN: 0.5
+  HUE: 0.0
+  MAX_SIZE_TEST: 1000
+  MAX_SIZE_TRAIN: 1000
+  MIN_SIZE_TEST: 600
+  MIN_SIZE_TRAIN: (600,)
+  PIXEL_MEAN: [102.9801, 115.9465, 122.7717]
+  PIXEL_STD: [1.0, 1.0, 1.0]
+  SATURATION: 0.0
+  TO_BGR255: True
+  VERTICAL_FLIP_PROB_TRAIN: 0.0
+MODEL:
+  BACKBONE:
+    CONV_BODY: R-101-C4
+    FREEZE_CONV_BODY_AT: 2
+  CLS_AGNOSTIC_BBOX_REG: False
+  DEVICE: cuda
+  FBNET:
+    ARCH: default
+    ARCH_DEF: 
+    BN_TYPE: bn
+    DET_HEAD_BLOCKS: []
+    DET_HEAD_LAST_SCALE: 1.0
+    DET_HEAD_STRIDE: 0
+    DW_CONV_SKIP_BN: True
+    DW_CONV_SKIP_RELU: True
+    KPTS_HEAD_BLOCKS: []
+    KPTS_HEAD_LAST_SCALE: 0.0
+    KPTS_HEAD_STRIDE: 0
+    MASK_HEAD_BLOCKS: []
+    MASK_HEAD_LAST_SCALE: 0.0
+    MASK_HEAD_STRIDE: 0
+    RPN_BN_TYPE: 
+    RPN_HEAD_BLOCKS: 0
+    SCALE_FACTOR: 1.0
+    WIDTH_DIVISOR: 1
+  FPN:
+    USE_GN: False
+    USE_RELU: False
+  GROUP_NORM:
+    DIM_PER_GP: -1
+    EPSILON: 1e-05
+    NUM_GROUPS: 32
+  KEYPOINT_ON: False
+  MASK_ON: False
+  META_ARCHITECTURE: GeneralizedRCNNMEGA
+  RESNETS:
+    BACKBONE_OUT_CHANNELS: 1024
+    DEFORMABLE_GROUPS: 1
+    NUM_GROUPS: 1
+    RES2_OUT_CHANNELS: 256
+    RES5_DILATION: 2
+    STAGE_WITH_DCN: (False, False, False, False)
+    STEM_FUNC: StemWithFixedBatchNorm
+    STEM_OUT_CHANNELS: 64
+    STRIDE_IN_1X1: True
+    TRANS_FUNC: BottleneckWithFixedBatchNorm
+    WIDTH_PER_GROUP: 64
+    WITH_MODULATED_DCN: False
+  RETINANET:
+    ANCHOR_SIZES: (32, 64, 128, 256, 512)
+    ANCHOR_STRIDES: (8, 16, 32, 64, 128)
+    ASPECT_RATIOS: (0.5, 1.0, 2.0)
+    BBOX_REG_BETA: 0.11
+    BBOX_REG_WEIGHT: 4.0
+    BG_IOU_THRESHOLD: 0.4
+    FG_IOU_THRESHOLD: 0.5
+    INFERENCE_TH: 0.05
+    LOSS_ALPHA: 0.25
+    LOSS_GAMMA: 2.0
+    NMS_TH: 0.4
+    NUM_CLASSES: 81
+    NUM_CONVS: 4
+    OCTAVE: 2.0
+    PRE_NMS_TOP_N: 1000
+    PRIOR_PROB: 0.01
+    SCALES_PER_OCTAVE: 3
+    STRADDLE_THRESH: 0
+    USE_C5: True
+  RETINANET_ON: False
+  ROI_BOX_HEAD:
+    CONV_HEAD_DIM: 256
+    DILATION: 1
+    FEATURE_EXTRACTOR: MEGAFeatureExtractor
+    MLP_HEAD_DIM: 1024
+    NUM_CLASSES: 31
+    NUM_STACKED_CONVS: 4
+    POOLER_RESOLUTION: 7
+    POOLER_SAMPLING_RATIO: 0
+    POOLER_SCALES: (0.0625,)
+    PREDICTOR: FPNPredictor
+    USE_GN: False
+  ROI_HEADS:
+    BATCH_SIZE_PER_IMAGE: 128
+    BBOX_REG_WEIGHTS: (10.0, 10.0, 5.0, 5.0)
+    BG_IOU_THRESHOLD: 0.5
+    DETECTIONS_PER_IMG: 300
+    FG_IOU_THRESHOLD: 0.5
+    NMS: 0.5
+    POSITIVE_FRACTION: 0.25
+    SCORE_THRESH: 0.001
+    USE_FPN: False
+  ROI_KEYPOINT_HEAD:
+    CONV_LAYERS: (512, 512, 512, 512, 512, 512, 512, 512)
+    FEATURE_EXTRACTOR: KeypointRCNNFeatureExtractor
+    MLP_HEAD_DIM: 1024
+    NUM_CLASSES: 17
+    POOLER_RESOLUTION: 14
+    POOLER_SAMPLING_RATIO: 0
+    POOLER_SCALES: (0.0625,)
+    PREDICTOR: KeypointRCNNPredictor
+    RESOLUTION: 14
+    SHARE_BOX_FEATURE_EXTRACTOR: True
+  ROI_MASK_HEAD:
+    CONV_LAYERS: (256, 256, 256, 256)
+    DILATION: 1
+    FEATURE_EXTRACTOR: ResNet50Conv5ROIFeatureExtractor
+    MLP_HEAD_DIM: 1024
+    POOLER_RESOLUTION: 14
+    POOLER_SAMPLING_RATIO: 0
+    POOLER_SCALES: (0.0625,)
+    POSTPROCESS_MASKS: False
+    POSTPROCESS_MASKS_THRESHOLD: 0.5
+    PREDICTOR: MaskRCNNC4Predictor
+    RESOLUTION: 14
+    SHARE_BOX_FEATURE_EXTRACTOR: True
+    USE_GN: False
+  RPN:
+    ANCHOR_SIZES: (64, 128, 256, 512)
+    ANCHOR_STRIDE: (16,)
+    ASPECT_RATIOS: (0.5, 1.0, 2.0)
+    BATCH_SIZE_PER_IMAGE: 256
+    BG_IOU_THRESHOLD: 0.3
+    FG_IOU_THRESHOLD: 0.7
+    FPN_POST_NMS_PER_BATCH: True
+    FPN_POST_NMS_TOP_N_TEST: 2000
+    FPN_POST_NMS_TOP_N_TRAIN: 2000
+    MIN_SIZE: 0
+    NMS_THRESH: 0.7
+    POSITIVE_FRACTION: 0.5
+    POST_NMS_TOP_N_TEST: 300
+    POST_NMS_TOP_N_TRAIN: 300
+    PRE_NMS_TOP_N_TEST: 6000
+    PRE_NMS_TOP_N_TRAIN: 6000
+    RPN_HEAD: SingleConvRPNHead
+    STRADDLE_THRESH: 0
+    USE_FPN: False
+  RPN_ONLY: False
+  VID:
+    DFF:
+      MAX_OFFSET: 0
+      MIN_OFFSET: -9
+    ENABLE: True
+    FGFA:
+      ALL_FRAME_INTERVAL: 19
+      KEY_FRAME_LOCATION: 9
+      MAX_OFFSET: 9
+      MIN_OFFSET: -9
+      REF_NUM: 2
+    FLOWNET_WEIGHT: models/flownet.ckpt
+    IGNORE: False
+    MEGA:
+      ALL_FRAME_INTERVAL: 25
+      GLOBAL:
+        ENABLE: True
+        RES_STAGE: 1
+        SHUFFLE: True
+        SIZE: 10
+      KEY_FRAME_LOCATION: 12
+      MAX_OFFSET: 12
+      MEMORY:
+        ENABLE: True
+        SIZE: 25
+      MIN_OFFSET: -12
+      RATIO: 0.2
+      REF_NUM_GLOBAL: 2
+      REF_NUM_LOCAL: 2
+      REF_NUM_MEM: 3
+    METHOD: mega
+    RDN:
+      ALL_FRAME_INTERVAL: 37
+      KEY_FRAME_LOCATION: 18
+      MAX_OFFSET: 18
+      MIN_OFFSET: -18
+      RATIO: 0.2
+      REF_NUM: 2
+    ROI_BOX_HEAD:
+      ATTENTION:
+        ADVANCED_STAGE: 0
+        EMBED_DIM: 64
+        ENABLE: True
+        GROUP: 16
+        STAGE: 3
+      REDUCE_CHANNEL: False
+    RPN:
+      REF_POST_NMS_TOP_N: 75
+      REF_PRE_NMS_TOP_N: 6000
+  WEIGHT: catalog://ImageNetPretrained/MSRA/R-101
+OUTPUT_DIR: training_dir\MEGA_R_101_1x
+PATHS_CATALOG: c:\users\endre\pycharmprojects\dl4vsp\mega_core\config\paths_catalog.py
+SOLVER:
+  BASE_LR: 0.001
+  BIAS_LR_FACTOR: 2
+  CHECKPOINT_PERIOD: 2500
+  GAMMA: 0.1
+  IMS_PER_BATCH: 1
+  MAX_ITER: 120000
+  MOMENTUM: 0.9
+  STEPS: (80000,)
+  TEST_PERIOD: 0
+  WARMUP_FACTOR: 0.3333333333333333
+  WARMUP_ITERS: 500
+  WARMUP_METHOD: linear
+  WEIGHT_DECAY: 0.0001
+  WEIGHT_DECAY_BIAS: 0
+TEST:
+  BBOX_AUG:
+    ENABLED: False
+    H_FLIP: False
+    MAX_SIZE: 4000
+    SCALES: ()
+    SCALE_H_FLIP: False
+  DETECTIONS_PER_IMG: 300
+  EXPECTED_RESULTS: []
+  EXPECTED_RESULTS_SIGMA_TOL: 4
+  IMS_PER_BATCH: 1
+2023-11-25 22:14:01,982 mega_core INFO: Saving config into: training_dir\MEGA_R_101_1x\config.yml

@@ -7,9 +7,9 @@ try:
     from torch.hub import urlparse
     from torch.hub import HASH_REGEX
 except ImportError:
-    from torch.utils.model_zoo import _download_url_to_file
-    from torch.utils.model_zoo import urlparse
-    from torch.utils.model_zoo import HASH_REGEX
+    from torch.hub import download_url_to_file
+    from torch.hub import urlparse
+    from torch.hub import HASH_REGEX
 
 from mega_core.utils.comm import is_main_process
 from mega_core.utils.comm import synchronize

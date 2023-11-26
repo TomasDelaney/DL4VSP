@@ -21,5 +21,6 @@ __all__ = [
     "VIDRDNDataset",
     "VIDMEGADataset",
     "VIDFGFADataset",
-    "VIDDFFDataset"
+    "VIDDFFDataset",
+    # "CustomDataset"
 ]

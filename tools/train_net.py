@@ -38,7 +38,7 @@ except ImportError:
 
 def train(cfg, local_rank, distributed):
     model = build_detection_model(cfg)
-    device = torch.device(cfg.MODEL.DEVICE)
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model.to(device)
 
     optimizer = make_optimizer(cfg, model)

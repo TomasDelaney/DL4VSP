@@ -173,6 +173,11 @@ class DatasetCatalog(object):
             "img_dir": "ILSVRC2015/Data/VID",
             "anno_path": "ILSVRC2015/Annotations/VID",
             "img_index": "ILSVRC2015/ImageSets/VID_val_videos.txt"
+        },
+        "custom_validation": {
+            "img_dir": "vid_custom",
+            "anno_path": "ILSVRC2015/Annotations/custom",
+            "img_index": "ILSVRC2015/ImageSets/custom_validation.txt"
         }
     }
 
@@ -187,6 +192,17 @@ class DatasetCatalog(object):
             )
             return dict(
                 factory="COCODataset",
+                args=args,
+            )
+        elif "custom_validation" in name:
+            data_dir = DatasetCatalog.DATA_DIR
+            attrs = DatasetCatalog.DATASETS[name]
+            args = dict(
+                root=os.path.join(data_dir, attrs["img_dir"]),
+                ann_file=os.path.join(data_dir, attrs["anno_path"]),
+            )
+            return dict(
+                factory="custom_validation",
                 args=args,
             )
         elif "voc" in name:
